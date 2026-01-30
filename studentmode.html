@@ -137,7 +137,7 @@ body {
   overflow-x: hidden;
 }
 
-/* ===== RESPONSIVE LAYOUT STRUCTURE ===== */
+/* ===== NEW RESPONSIVE LAYOUT STRUCTURE ===== */
 .app-layout {
   display: grid;
   grid-template-columns: 280px 1fr;
@@ -422,36 +422,63 @@ body {
   margin-bottom: var(--spacing-xl);
 }
 
+/* UPDATED: Controls Bar - Compact and Inline */
 .controls-bar {
   display: flex;
-  gap: var(--spacing-md);
+  gap: var(--spacing-sm);
   align-items: center;
-  flex-wrap: wrap;
-  padding: var(--spacing-lg);
+  flex-wrap: nowrap;
+  padding: var(--spacing-sm) var(--spacing-md);
   background: var(--card);
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius);
   border: 1px solid var(--border);
   margin-bottom: var(--spacing-xl);
+  overflow-x: auto;
+  min-width: 0;
 }
 
-/* ===== MOBILE MENU TOGGLE ===== */
-.mobile-menu-toggle {
+.controls-bar .btn {
+  flex-shrink: 0;
+  white-space: nowrap;
+  min-width: fit-content;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.875rem;
+}
+
+/* ===== TOP NAVIGATION FOR MOBILE ===== */
+.top-nav {
   display: none;
   position: fixed;
-  top: 20px;
-  left: 20px;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: var(--card);
+  border-bottom: 1px solid var(--border);
   z-index: 1000;
+  padding: var(--spacing-sm) var(--spacing-lg);
+  box-shadow: var(--shadow);
+}
+
+.top-nav-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.mobile-menu-toggle {
+  display: none;
   background: var(--gradient-primary);
   color: white;
   border: none;
   border-radius: var(--radius);
-  width: 50px;
-  height: 50px;
+  width: 44px;
+  height: 44px;
   align-items: center;
   justify-content: center;
-  font-size: 1.5rem;
-  box-shadow: var(--shadow-lg);
+  font-size: 1.25rem;
   cursor: pointer;
+  flex-shrink: 0;
 }
 
 .mobile-overlay {
@@ -517,38 +544,42 @@ body {
   gap: var(--spacing-xl);
 }
 
-/* Quick Stats */
+/* UPDATED: Quick Stats - Smaller and Inline */
 .quick-stats {
   grid-column: span 12;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: var(--spacing-lg);
+  gap: var(--spacing-md);
 }
 
 .stat-card {
   background: var(--card);
-  border-radius: var(--radius-lg);
-  padding: var(--spacing-xl);
+  border-radius: var(--radius);
+  padding: var(--spacing-md);
   border: 1px solid var(--border);
   transition: all var(--transition);
   display: flex;
   align-items: center;
-  gap: var(--spacing-lg);
+  gap: var(--spacing-sm);
+  max-width: 100%;
+  overflow: hidden;
+  height: auto;
+  min-height: 80px;
 }
 
 .stat-card:hover {
-  transform: translateY(-5px);
-  box-shadow: var(--shadow-lg);
+  transform: translateY(-3px);
+  box-shadow: var(--shadow);
 }
 
 .stat-icon {
-  width: 64px;
-  height: 64px;
-  border-radius: var(--radius);
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-sm);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.75rem;
+  font-size: 1.25rem;
   background: var(--gradient-primary);
   color: white;
   flex-shrink: 0;
@@ -568,27 +599,33 @@ body {
 
 .stat-content {
   flex: 1;
+  min-width: 0;
 }
 
 .stat-number {
-  font-size: 2.5rem;
+  font-size: 1.5rem;
   font-weight: 800;
   line-height: 1;
   margin-bottom: var(--spacing-xs);
   color: var(--text);
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .stat-label {
-  font-size: 0.875rem;
+  font-size: 0.75rem;
   color: var(--text-muted);
   text-transform: uppercase;
   letter-spacing: 0.5px;
   font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 /* Forms Section */
 .forms-section {
-  grid-column: span 4;
+  grid-column: span 6;
   display: flex;
   flex-direction: column;
   gap: var(--spacing-xl);
@@ -600,6 +637,8 @@ body {
   padding: var(--spacing-xl);
   border: 1px solid var(--border);
   transition: all var(--transition);
+  max-width: 100%;
+  overflow: hidden;
 }
 
 .form-card:hover {
@@ -613,6 +652,9 @@ body {
   display: flex;
   align-items: center;
   gap: var(--spacing-sm);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 /* Form Elements */
@@ -626,6 +668,7 @@ body {
   font-weight: 600;
   color: var(--text);
   font-size: 0.875rem;
+  white-space: nowrap;
 }
 
 input, textarea, select {
@@ -638,6 +681,7 @@ input, textarea, select {
   font-size: 0.9375rem;
   font-family: inherit;
   transition: all var(--transition-fast);
+  max-width: 100%;
 }
 
 input:focus, textarea:focus, select:focus {
@@ -668,6 +712,7 @@ textarea {
   align-items: center;
   justify-content: center;
   gap: var(--spacing-sm);
+  white-space: nowrap;
 }
 
 .btn-submit:hover {
@@ -686,6 +731,7 @@ textarea {
   display: inline-flex;
   align-items: center;
   gap: 0.25rem;
+  white-space: nowrap;
 }
 
 .priority-urgent {
@@ -722,6 +768,7 @@ textarea {
   transition: all var(--transition);
   font-size: 0.875rem;
   font-weight: 500;
+  white-space: nowrap;
 }
 
 .priority-option:hover {
@@ -753,7 +800,7 @@ textarea {
 
 /* Content Section */
 .content-section {
-  grid-column: span 8;
+  grid-column: span 6;
   display: flex;
   flex-direction: column;
   gap: var(--spacing-xl);
@@ -764,6 +811,7 @@ textarea {
   border-radius: var(--radius-lg);
   border: 1px solid var(--border);
   overflow: hidden;
+  max-width: 100%;
 }
 
 .content-header {
@@ -772,8 +820,9 @@ textarea {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   gap: var(--spacing-md);
+  min-width: 0;
 }
 
 .content-header h2 {
@@ -782,6 +831,9 @@ textarea {
   display: flex;
   align-items: center;
   gap: var(--spacing-sm);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .content-body {
@@ -806,11 +858,12 @@ textarea {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   gap: var(--spacing-md);
   transition: all var(--transition);
   position: relative;
   overflow: hidden;
+  max-width: 100%;
 }
 
 .task-item::before {
@@ -860,12 +913,15 @@ textarea {
 
 .task-text {
   flex: 1;
-  min-width: 200px;
+  min-width: 0;
   font-size: 1.1rem;
   font-weight: 500;
   cursor: pointer;
   padding: 0.5rem 0;
   transition: var(--transition);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .task-text:hover {
@@ -875,8 +931,9 @@ textarea {
 .task-actions {
   display: flex;
   gap: var(--spacing-sm);
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   align-items: center;
+  flex-shrink: 0;
 }
 
 /* Assignment List */
@@ -892,6 +949,8 @@ textarea {
   border-radius: var(--radius);
   padding: var(--spacing-lg);
   transition: all var(--transition);
+  max-width: 100%;
+  overflow: hidden;
 }
 
 .assignment-item:hover {
@@ -905,14 +964,18 @@ textarea {
   justify-content: space-between;
   align-items: flex-start;
   margin-bottom: var(--spacing-sm);
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   gap: var(--spacing-sm);
+  min-width: 0;
 }
 
 .assignment-title {
   font-weight: 600;
   color: var(--text);
   font-size: 1.125rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .assignment-date {
@@ -924,6 +987,7 @@ textarea {
   border-radius: 1rem;
   border: 1px solid var(--border);
   white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .assignment-content {
@@ -931,13 +995,14 @@ textarea {
   margin-bottom: var(--spacing-md);
   line-height: 1.7;
   padding: 0.5rem 0;
+  overflow: hidden;
 }
 
 .assignment-actions {
   display: flex;
   justify-content: flex-end;
   gap: var(--spacing-sm);
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
 }
 
 /* Classroom Announcements & Resources */
@@ -948,6 +1013,8 @@ textarea {
   padding: var(--spacing-lg);
   margin-bottom: var(--spacing-md);
   transition: all var(--transition);
+  max-width: 100%;
+  overflow: hidden;
 }
 
 .classroom-item:hover {
@@ -961,14 +1028,18 @@ textarea {
   justify-content: space-between;
   align-items: flex-start;
   margin-bottom: var(--spacing-sm);
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   gap: var(--spacing-sm);
+  min-width: 0;
 }
 
 .classroom-item-title {
   font-weight: 600;
   color: var(--text);
   font-size: 1.125rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .classroom-item-date {
@@ -979,12 +1050,15 @@ textarea {
   padding: 0.25rem 0.75rem;
   border-radius: 1rem;
   border: 1px solid var(--border);
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .classroom-item-content {
   color: var(--text);
   margin-bottom: var(--spacing-md);
   line-height: 1.7;
+  overflow: hidden;
 }
 
 .classroom-item-link {
@@ -994,6 +1068,7 @@ textarea {
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  white-space: nowrap;
 }
 
 .classroom-item-link:hover {
@@ -1003,7 +1078,7 @@ textarea {
 /* Tools Grid */
 .tools-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  grid-template-columns: repeat(2, 1fr);
   gap: var(--spacing-lg);
   margin-top: var(--spacing-lg);
 }
@@ -1019,6 +1094,8 @@ textarea {
   text-decoration: none;
   color: var(--text);
   display: block;
+  max-width: 100%;
+  overflow: hidden;
 }
 
 .tool-item:hover {
@@ -1045,21 +1122,29 @@ textarea {
   font-weight: 700;
   margin-bottom: var(--spacing-xs);
   color: var(--accent);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .tool-desc {
   font-size: 0.875rem;
   color: var(--text-muted);
   line-height: 1.4;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  
+  -webkit-box-orient: vertical;
 }
 
 /* ===== BUTTONS ===== */
 .btn {
-  padding: 0.75rem 1.5rem;
+  padding: 0.5rem 0.75rem;
   border-radius: var(--radius);
   border: none;
   font-weight: 600;
-  font-size: 0.9375rem;
+  font-size: 0.875rem;
   cursor: pointer;
   transition: all var(--transition);
   display: inline-flex;
@@ -1067,6 +1152,7 @@ textarea {
   justify-content: center;
   gap: 0.5rem;
   white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .btn-primary {
@@ -1221,6 +1307,7 @@ textarea {
   margin-bottom: var(--spacing-lg);
   position: relative;
   z-index: 1;
+  white-space: nowrap;
 }
 
 .streak-milestones {
@@ -1230,6 +1317,7 @@ textarea {
   margin: var(--spacing-md) 0;
   position: relative;
   z-index: 1;
+  flex-wrap: wrap;
 }
 
 .milestone {
@@ -1261,6 +1349,7 @@ textarea {
   justify-content: center;
   position: relative;
   z-index: 1;
+  white-space: nowrap;
 }
 
 .streak-btn:hover:not(:disabled) {
@@ -1376,12 +1465,13 @@ textarea {
   text-shadow: 0 4px 20px rgba(0,0,0,0.3);
   position: relative;
   z-index: 1;
+  word-break: break-all;
 }
 
 /* ===== MULTIPLE CLASSES VIEW ===== */
 .classes-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-template-columns: repeat(2, 1fr);
   gap: var(--spacing-lg);
   margin-top: var(--spacing-lg);
 }
@@ -1394,6 +1484,7 @@ textarea {
   transition: all var(--transition);
   position:relative;
   overflow: hidden;
+  max-width: 100%;
 }
 
 .class-card:hover {
@@ -1407,14 +1498,18 @@ textarea {
   justify-content: space-between;
   align-items: center;
   margin-bottom: var(--spacing-md);
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   gap: var(--spacing-sm);
+  min-width: 0;
 }
 
 .class-card-title {
   font-size: 1.25rem;
   font-weight: 700;
   color: var(--text);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .class-card-code {
@@ -1425,6 +1520,8 @@ textarea {
   font-family: 'Courier New', monospace;
   font-size: 0.875rem;
   font-weight: 700;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .class-card-stats {
@@ -1440,12 +1537,15 @@ textarea {
   background: var(--bg);
   border-radius: var(--radius);
   border: 1px solid var(--border);
+  overflow: hidden;
 }
 
 .class-card-stat .value {
   font-size: 1.25rem;
   font-weight: 700;
   color: var(--accent);
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .class-card-stat .label {
@@ -1453,13 +1553,23 @@ textarea {
   color: var(--text-muted);
   text-transform: uppercase;
   letter-spacing: 0.5px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .class-card-actions {
   display: flex;
   gap: var(--spacing-sm);
   margin-top: var(--spacing-md);
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
+}
+
+.class-card-actions .btn {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 /* ===== LEADERBOARD STYLES ===== */
@@ -1475,13 +1585,13 @@ textarea {
   align-items: center;
   padding-bottom: var(--spacing-md);
   border-bottom: 1px solid var(--border);
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   gap: var(--spacing-sm);
 }
 
 .leaderboard-stats {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  grid-template-columns: repeat(2, 1fr);
   gap: var(--spacing-sm);
   margin-bottom: var(--spacing-md);
 }
@@ -1492,6 +1602,7 @@ textarea {
   background: var(--bg);
   border-radius: var(--radius);
   border: 1px solid var(--border);
+  overflow: hidden;
 }
 
 .leaderboard-stat .value {
@@ -1499,6 +1610,8 @@ textarea {
   font-weight: 700;
   color: var(--accent);
   margin-bottom: 0.25rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .leaderboard-stat .label {
@@ -1506,6 +1619,9 @@ textarea {
   color: var(--text-muted);
   text-transform: uppercase;
   letter-spacing: 0.5px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .leaderboard-list {
@@ -1523,7 +1639,9 @@ textarea {
   border-radius: var(--radius);
   border: 1px solid var(--border);
   transition: all var(--transition);
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
+  max-width: 100%;
+  overflow: hidden;
 }
 
 .leaderboard-item:hover {
@@ -1550,6 +1668,7 @@ textarea {
   width: 40px;
   text-align: center;
   color: var(--accent);
+  flex-shrink: 0;
 }
 
 .rank-1 .leaderboard-rank { color: #FFD700; }
@@ -1572,18 +1691,25 @@ textarea {
 
 .leaderboard-info {
   flex: 1;
-  min-width: 200px;
+  min-width: 0;
+  overflow: hidden;
 }
 
 .leaderboard-name {
   font-weight: 700;
   font-size: 1.125rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .leaderboard-subtitle {
   font-size: 0.875rem;
   color: var(--text-muted);
   margin-top: 0.25rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .leaderboard-item.you .leaderboard-subtitle {
@@ -1596,13 +1722,14 @@ textarea {
   color: var(--accent);
   text-align: right;
   min-width: 80px;
+  flex-shrink: 0;
 }
 
 .leaderboard-stats-row {
   display: flex;
   gap: var(--spacing-sm);
   margin-top: var(--spacing-sm);
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
 }
 
 .stats-badge {
@@ -1616,6 +1743,7 @@ textarea {
   align-items: center;
   gap: 0.25rem;
   white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .stats-badge.fire { color: var(--warning); }
@@ -1628,12 +1756,111 @@ textarea {
   color: var(--text-muted);
 }
 
-/* ===== STATISTICS SECTION - UPDATED ===== */
-.charts-container {
+/* ===== UPDATED STATISTICS SECTION ===== */
+.statistics-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-  gap: var(--spacing-xl);
+  grid-template-columns: repeat(12, 1fr);
+  gap: var(--spacing-lg);
   margin-top: var(--spacing-xl);
+}
+
+.statistics-header {
+  grid-column: span 12;
+  background: var(--card);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-xl);
+  border: 1px solid var(--border);
+  margin-bottom: var(--spacing-lg);
+}
+
+.statistics-header h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: var(--spacing-sm);
+  color: var(--text);
+}
+
+.statistics-subtitle {
+  color: var(--text-muted);
+  font-size: 1rem;
+  margin-bottom: var(--spacing-lg);
+}
+
+.stats-overview-cards {
+  grid-column: span 12;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--spacing-lg);
+  margin-bottom: var(--spacing-xl);
+}
+
+.stats-overview-card {
+  background: var(--card);
+  border-radius: var(--radius);
+  padding: var(--spacing-lg);
+  border: 1px solid var(--border);
+  transition: var(--transition);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.stats-overview-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow);
+  border-color: var(--accent);
+}
+
+.stats-overview-icon {
+  font-size: 2rem;
+  margin-bottom: var(--spacing-sm);
+  display: block;
+}
+
+.stats-overview-number {
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--accent);
+  margin-bottom: var(--spacing-xs);
+  line-height: 1;
+}
+
+.stats-overview-label {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: var(--spacing-sm);
+}
+
+.stats-overview-trend {
+  font-size: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-xs);
+  margin-top: var(--spacing-sm);
+}
+
+.stats-overview-trend.up {
+  color: var(--success);
+}
+
+.stats-overview-trend.down {
+  color: var(--danger);
+}
+
+.stats-overview-trend.neutral {
+  color: var(--text-muted);
+}
+
+/* Charts Container - Improved for Mobile */
+.charts-container {
+  grid-column: span 12;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: var(--spacing-lg);
+  margin-bottom: var(--spacing-xl);
 }
 
 .chart-card {
@@ -1642,133 +1869,221 @@ textarea {
   padding: var(--spacing-xl);
   border: 1px solid var(--border);
   transition: all var(--transition);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
 
 .chart-card:hover {
   box-shadow: var(--shadow-md);
+  border-color: var(--accent);
 }
 
-.chart-card h3 {
-  font-size: 1.25rem;
-  font-weight: 700;
+.chart-header {
   margin-bottom: var(--spacing-lg);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: var(--spacing-sm);
+}
+
+.chart-header h3 {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--text);
   display: flex;
   align-items: center;
   gap: var(--spacing-sm);
 }
 
-.chart-wrapper {
-  position: relative;
-  height: 300px;
-  width: 100%;
+.chart-description {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  margin-top: var(--spacing-xs);
+  line-height: 1.4;
 }
 
-/* New Statistics Charts */
-.daily-stats-grid {
+.chart-wrapper {
+  position: relative;
+  height: 250px;
+  width: 100%;
+  flex: 1;
+  min-height: 200px;
+}
+
+/* Detailed Statistics */
+.stats-detailed-container {
+  grid-column: span 12;
+  background: var(--card);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-xl);
+  border: 1px solid var(--border);
+  margin-top: var(--spacing-lg);
+}
+
+.stats-detailed-container h3 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: var(--spacing-lg);
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+.stats-detailed-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: var(--spacing-lg);
   margin-bottom: var(--spacing-xl);
 }
 
-.daily-stat-card {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
+.stats-detailed-section {
   padding: var(--spacing-lg);
+  background: var(--bg);
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+}
+
+.stats-detailed-section h4 {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  margin-bottom: var(--spacing-md);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.stats-detailed-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--spacing-sm) 0;
+  border-bottom: 1px solid rgba(var(--border-rgb), 0.2);
+}
+
+.stats-detailed-row:last-child {
+  border-bottom: none;
+}
+
+.stats-detailed-label {
+  font-size: 0.875rem;
+  color: var(--text);
+}
+
+.stats-detailed-value {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+/* Chart Legends - Theme Adaptive */
+.chart-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-sm);
+  margin-top: var(--spacing-md);
+  padding-top: var(--spacing-md);
+  border-top: 1px solid var(--border);
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.legend-color {
+  width: 12px;
+  height: 12px;
+  border-radius: 2px;
+}
+
+/* Statistics Controls */
+.stats-controls {
+  display: flex;
+  gap: var(--spacing-sm);
+  flex-wrap: wrap;
+  margin-top: var(--spacing-lg);
+  padding-top: var(--spacing-lg);
+  border-top: 1px solid var(--border);
+}
+
+.stats-controls .btn {
+  font-size: 0.875rem;
+  padding: 0.5rem 1rem;
+}
+
+/* Performance Metrics */
+.performance-metrics {
+  grid-column: span 12;
+  background: var(--card);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-xl);
+  border: 1px solid var(--border);
+  margin-top: var(--spacing-lg);
+}
+
+.performance-metrics h3 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: var(--spacing-lg);
+  color: var(--text);
+}
+
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--spacing-lg);
+}
+
+.metric-card {
+  background: var(--bg);
+  border-radius: var(--radius);
+  padding: var(--spacing-lg);
+  border: 1px solid var(--border);
   text-align: center;
   transition: var(--transition);
 }
 
-.daily-stat-card:hover {
-  transform: translateY(-5px);
-  box-shadow: var(--shadow-md);
+.metric-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow);
 }
 
-.daily-stat-number {
-  font-size: 2.5rem;
+.metric-icon {
+  font-size: 1.5rem;
+  margin-bottom: var(--spacing-sm);
+  display: block;
+}
+
+.metric-value {
+  font-size: 1.75rem;
   font-weight: 800;
   color: var(--accent);
   margin-bottom: var(--spacing-xs);
+  line-height: 1;
 }
 
-.daily-stat-label {
+.metric-label {
   font-size: 0.875rem;
   color: var(--text-muted);
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  margin-bottom: var(--spacing-sm);
+  margin-bottom: var(--spacing-xs);
 }
 
-.daily-stat-trend {
-  font-size: 0.875rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: var(--spacing-xs);
-}
-
-.trend-up {
-  color: var(--success);
-}
-
-.trend-down {
-  color: var(--danger);
-}
-
-.trend-neutral {
-  color: var(--text-muted);
+.metric-details {
+  font-size: 0.75rem;
+  color: var(--text);
+  opacity: 0.8;
 }
 
 /* Study Session Button */
 .study-session-btn {
-  margin-top: var(--spacing-md);
+  margin-top: var(--spacing-lg);
   width: 100%;
-}
-
-.stat-summary-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: var(--spacing-lg);
-  margin-top: var(--spacing-xl);
-}
-
-.stat-summary-card {
-  background: var(--bg);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: var(--spacing-lg);
-  text-align: center;
-  transition: var(--transition);
-}
-
-.stat-summary-card:hover {
-  transform: translateY(-5px);
-  border-color: var(--accent);
-}
-
-.stat-summary-number {
-  font-size: 2.5rem;
-  font-weight: 800;
-  color: var(--accent);
-  margin-bottom: var(--spacing-xs);
-}
-
-.stat-summary-label {
-  font-size: 0.875rem;
-  color: var(--text-muted);
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
-
-.stat-summary-details {
-  font-size: 0.875rem;
-  color: var(--text);
-  margin-top: var(--spacing-sm);
-}
-
-.comparison-chart {
-  grid-column: span 2;
 }
 
 /* ===== FOOTER WITH COPYRIGHT ===== */
@@ -1883,65 +2198,15 @@ textarea {
   gap: 0.5rem;
   backdrop-filter: blur(10px);
   animation: fadeIn 0.5s ease-out;
+  white-space: nowrap;
 }
 
 /* ===== EXTREME RESPONSIVENESS ===== */
 
-/* Large Desktop (1400px and above) */
-@media (min-width: 1400px) {
+/* Desktop (1200px and above) */
+@media (min-width: 1200px) {
   .app-layout {
-    grid-template-columns: 300px 1fr;
-  }
-  
-  .main-content {
-    padding: var(--spacing-2xl);
-  }
-  
-  .sidebar {
-    padding: var(--spacing-2xl);
-  }
-}
-
-/* Desktop (1200px to 1399px) */
-@media (max-width: 1399px) {
-  .app-layout {
-    grid-template-columns: 260px 1fr;
-  }
-  
-  .quick-stats {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  
-  .forms-section,
-  .content-section {
-    grid-column: span 12;
-  }
-  
-  .daily-stats-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
-/* Tablet Landscape (992px to 1199px) */
-@media (max-width: 1199px) {
-  .app-layout {
-    grid-template-columns: 240px 1fr;
-  }
-  
-  .sidebar {
-    padding: var(--spacing-lg);
-  }
-  
-  .main-content {
-    padding: var(--spacing-lg);
-  }
-  
-  .dashboard-header h1 {
-    font-size: 2rem;
-  }
-  
-  .quick-stats {
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: 280px 1fr;
   }
   
   .forms-section,
@@ -1949,40 +2214,78 @@ textarea {
     grid-column: span 6;
   }
   
-  .stat-number {
-    font-size: 2rem;
+  .quick-stats {
+    grid-template-columns: repeat(4, 1fr);
   }
   
   .charts-container {
-    grid-template-columns: 1fr;
-  }
-  
-  .daily-stats-grid {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
-/* Tablet Portrait (768px to 991px) */
-@media (max-width: 991px) {
-  .mobile-menu-toggle {
-    display: flex;
+/* Tablet (768px to 1199px) */
+@media (max-width: 1199px) and (min-width: 768px) {
+  .app-layout {
+    grid-template-columns: 240px 1fr;
   }
   
+  .forms-section,
+  .content-section {
+    grid-column: span 6;
+  }
+  
+  .quick-stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .charts-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .stats-overview-cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .stats-detailed-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .tools-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .classes-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Mobile (below 768px) */
+@media (max-width: 767px) {
   .app-layout {
     grid-template-columns: 1fr;
   }
   
+  .top-nav {
+    display: block;
+  }
+  
   .sidebar {
     position: fixed;
-    top: 0;
+    top: 60px;
     left: -280px;
     width: 280px;
+    height: calc(100vh - 60px);
     transition: left 0.3s ease;
     z-index: 100;
+    padding: var(--spacing-lg);
   }
   
   .sidebar.active {
     left: 0;
+  }
+  
+  .mobile-menu-toggle {
+    display: flex;
   }
   
   .mobile-overlay.active {
@@ -1990,12 +2293,8 @@ textarea {
   }
   
   .main-content {
-    margin-left: 0;
-    padding: var(--spacing-lg) var(--spacing-md);
-  }
-  
-  .quick-stats {
-    grid-template-columns: repeat(2, 1fr);
+    margin-top: 60px;
+    padding: var(--spacing-md);
   }
   
   .forms-section,
@@ -2003,72 +2302,141 @@ textarea {
     grid-column: span 12;
   }
   
-  .controls-bar {
-    flex-direction: column;
-    align-items: stretch;
+  .quick-stats {
+    grid-template-columns: repeat(2, 1fr);
     gap: var(--spacing-sm);
   }
   
   .dashboard-header h1 {
     font-size: 1.75rem;
-    margin-top: 40px;
+    text-align: center;
   }
   
-  .stat-number {
-    font-size: 1.75rem;
+  .dashboard-subtitle {
+    text-align: center;
   }
   
-  .daily-stats-grid {
+  .controls-bar {
+    flex-wrap: wrap;
+    padding: var(--spacing-sm);
+    gap: var(--spacing-sm);
+    justify-content: center;
+  }
+  
+  .controls-bar .btn {
+    font-size: 0.75rem;
+    padding: 0.375rem 0.625rem;
+    flex: 1;
+    min-width: calc(50% - 0.375rem);
+  }
+  
+  /* UPDATED: Statistics Section for Mobile */
+  .statistics-grid {
+    gap: var(--spacing-md);
+  }
+  
+  .statistics-header {
+    padding: var(--spacing-lg);
+    text-align: center;
+  }
+  
+  .statistics-header h2 {
+    font-size: 1.25rem;
+  }
+  
+  .stats-overview-cards {
     grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-md);
+  }
+  
+  .stats-overview-card {
+    padding: var(--spacing-md);
+  }
+  
+  .stats-overview-number {
+    font-size: 1.5rem;
+  }
+  
+  .stats-overview-icon {
+    font-size: 1.5rem;
+  }
+  
+  .charts-container {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-md);
   }
   
   .chart-card {
     padding: var(--spacing-lg);
   }
   
-  .chart-wrapper {
-    height: 250px;
-  }
-}
-
-/* Large Mobile (576px to 767px) */
-@media (max-width: 767px) {
-  .dashboard-header h1 {
-    font-size: 1.5rem;
-  }
-  
-  .quick-stats {
-    grid-template-columns: 1fr;
-  }
-  
-  .stat-card {
+  .chart-header {
     flex-direction: column;
-    text-align: center;
+    align-items: flex-start;
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-md);
+  }
+  
+  .chart-header h3 {
+    font-size: 1rem;
+  }
+  
+  .chart-wrapper {
+    height: 200px;
+    min-height: 150px;
+  }
+  
+  .chart-description {
+    font-size: 0.8125rem;
+  }
+  
+  .stats-detailed-container {
+    padding: var(--spacing-lg);
+  }
+  
+  .stats-detailed-grid {
+    grid-template-columns: 1fr;
     gap: var(--spacing-md);
   }
   
-  .stat-icon {
-    width: 56px;
-    height: 56px;
-    font-size: 1.5rem;
-  }
-  
-  .stat-number {
-    font-size: 1.5rem;
-  }
-  
-  .controls-bar {
+  .stats-detailed-section {
     padding: var(--spacing-md);
   }
   
-  .btn {
-    padding: 0.625rem 1.25rem;
-    font-size: 0.875rem;
+  .stats-detailed-row {
+    padding: var(--spacing-xs) 0;
+  }
+  
+  .performance-metrics {
+    padding: var(--spacing-lg);
+  }
+  
+  .metrics-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-md);
+  }
+  
+  .metric-card {
+    padding: var(--spacing-md);
+  }
+  
+  .metric-value {
+    font-size: 1.5rem;
+  }
+  
+  .stats-controls {
+    flex-direction: column;
+    gap: var(--spacing-sm);
+  }
+  
+  .stats-controls .btn {
+    width: 100%;
+    justify-content: center;
   }
   
   .content-header {
     flex-direction: column;
-    align-items: stretch;
+    align-items: flex-start;
     gap: var(--spacing-sm);
   }
   
@@ -2076,9 +2444,25 @@ textarea {
     font-size: 1.125rem;
   }
   
-  .content-body {
-    padding: var(--spacing-lg);
-    max-height: none;
+  .stat-card {
+    flex-direction: column;
+    text-align: center;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-sm);
+  }
+  
+  .stat-icon {
+    width: 32px;
+    height: 32px;
+    font-size: 1rem;
+  }
+  
+  .stat-number {
+    font-size: 1.25rem;
+  }
+  
+  .stat-label {
+    font-size: 0.65rem;
   }
   
   .task-item {
@@ -2097,39 +2481,9 @@ textarea {
     align-items: flex-start;
   }
   
-  .assignment-actions {
-    width: 100%;
-    justify-content: space-between;
-  }
-  
-  .tools-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: var(--spacing-md);
-  }
-  
-  .tool-item {
-    padding: var(--spacing-lg);
-  }
-  
-  .tool-icon {
-    font-size: 2.5rem;
-  }
-  
-  .daily-stats-grid {
-    grid-template-columns: 1fr;
-    gap: var(--spacing-md);
-  }
-  
-  .daily-stat-card {
-    padding: var(--spacing-md);
-  }
-  
-  .daily-stat-number {
-    font-size: 2rem;
-  }
-  
-  .stat-summary-grid {
-    grid-template-columns: repeat(2, 1fr);
+  .class-card-header {
+    flex-direction: column;
+    align-items: flex-start;
   }
   
   .leaderboard-item {
@@ -2139,92 +2493,41 @@ textarea {
   }
   
   .leaderboard-score {
-    text-align: left;
-    min-width: auto;
     align-self: flex-end;
-  }
-  
-  .classes-grid {
-    grid-template-columns: 1fr;
-  }
-  
-  .class-card-header {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-  
-  .class-card-actions {
-    width: 100%;
-  }
-  
-  .class-card-actions .btn {
-    flex: 1;
-  }
-  
-  .toast {
-    min-width: 250px;
-    padding: 1rem;
+    margin-top: var(--spacing-sm);
   }
 }
 
-/* Small Mobile (480px to 575px) */
-@media (max-width: 575px) {
-  .main-content {
-    padding: var(--spacing-md);
-  }
-  
-  .dashboard-header h1 {
-    font-size: 1.375rem;
-  }
-  
-  .dashboard-subtitle {
-    font-size: 1rem;
-  }
-  
-  .controls-bar {
-    padding: var(--spacing-sm);
-  }
-  
-  .btn {
-    width: 100%;
-    justify-content: center;
-  }
-  
-  .forms-section,
-  .content-section {
-    gap: var(--spacing-lg);
-  }
-  
-  .form-card {
-    padding: var(--spacing-lg);
-  }
-  
-  .form-card h2 {
-    font-size: 1.125rem;
-  }
-  
-  .tools-grid {
+/* Small Mobile (below 480px) */
+@media (max-width: 479px) {
+  .quick-stats {
     grid-template-columns: 1fr;
   }
   
-  .chart-card {
-    padding: var(--spacing-md);
-  }
-  
-  .chart-wrapper {
-    height: 200px;
-  }
-  
-  .stat-summary-grid {
+  .stats-overview-cards {
     grid-template-columns: 1fr;
   }
   
-  .leaderboard-stats {
-    grid-template-columns: repeat(2, 1fr);
+  .charts-container {
+    grid-template-columns: 1fr;
   }
   
-  .class-code-display {
-    padding: var(--spacing-lg);
+  .stats-detailed-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .metrics-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .controls-bar .btn {
+    font-size: 0.7rem;
+    padding: 0.375rem 0.5rem;
+    min-width: 100%;
+  }
+  
+  .priority-selector {
+    flex-direction: column;
   }
   
   .class-code-display .code {
@@ -2236,108 +2539,43 @@ textarea {
     font-size: 3rem;
   }
   
-  .quote-text {
-    font-size: 1.25rem;
-  }
-}
-
-/* Extra Small Mobile (below 480px) */
-@media (max-width: 479px) {
   .dashboard-header h1 {
-    font-size: 1.25rem;
-  }
-  
-  .stat-card {
-    padding: var(--spacing-lg);
-  }
-  
-  .stat-number {
-    font-size: 1.25rem;
-  }
-  
-  .priority-selector {
-    flex-direction: column;
-  }
-  
-  .priority-option {
-    padding: 0.75rem;
-  }
-  
-  .task-input-container {
-    flex-direction: column;
-  }
-  
-  .task-input-container input {
-    width: 100%;
-  }
-  
-  .assignment-actions {
-    flex-direction: column;
-  }
-  
-  .leaderboard-stat .value {
-    font-size: 1.25rem;
-  }
-  
-  .toast-container {
-    top: 16px;
-    right: 16px;
-    left: 16px;
+    font-size: 1.5rem;
   }
   
   .toast {
-    min-width: auto;
-    width: 100%;
+    min-width: 250px;
+    padding: 1rem;
   }
   
-  .streak-milestones {
-    flex-wrap: wrap;
-    justify-content: center;
+  .stat-card {
+    padding: 0.75rem;
+    min-height: 70px;
   }
   
-  .mobile-menu-toggle {
-    top: 16px;
-    left: 16px;
-    width: 44px;
-    height: 44px;
-    font-size: 1.25rem;
+  .stat-number {
+    font-size: 1.1rem;
+  }
+  
+  .chart-wrapper {
+    height: 180px;
   }
 }
 
 /* Orientation-specific adjustments */
 @media (max-height: 600px) and (orientation: landscape) {
   .sidebar {
-    padding-top: 70px;
+    padding-top: var(--spacing-lg);
     height: 100vh;
     overflow-y: auto;
   }
   
-  .mobile-menu-toggle {
-    top: 10px;
-    left: 10px;
+  .main-content {
+    padding: var(--spacing-md);
   }
   
-  .dashboard-header h1 {
-    margin-top: 0;
-  }
-  
-  .content-body {
-    max-height: 250px;
-  }
-  
-  .stories-section {
-    max-height: 150px;
-  }
-}
-
-/* High-DPI (Retina) Displays */
-@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
-  .btn {
-    font-weight: 600;
-  }
-  
-  .stat-number {
-    font-weight: 900;
+  .chart-wrapper {
+    height: 150px;
   }
 }
 
@@ -2372,14 +2610,23 @@ textarea {
   .classroom-item {
     break-inside: avoid;
   }
+  
+  .chart-wrapper {
+    height: 200px !important;
+  }
 }
 </style>
 </head>
 
 <body>
 
-<!-- Mobile Menu Toggle -->
-<button class="mobile-menu-toggle" id="mobileMenuToggle">☰</button>
+<!-- Top Navigation for Mobile -->
+<nav class="top-nav" id="topNav">
+  <div class="top-nav-header">
+    <h2 style="font-size: 1.25rem; font-weight: 700; margin: 0;">Student Dashboard</h2>
+    <button class="mobile-menu-toggle" id="mobileMenuToggle">☰</button>
+  </div>
+</nav>
 <div class="mobile-overlay" id="mobileOverlay"></div>
 
 <div class="app-layout">
@@ -2494,10 +2741,11 @@ textarea {
       <h1>Welcome to Your Learning Dashboard</h1>
       <p class="dashboard-subtitle" id="dashboardSubtitle">Track your progress, manage tasks, and achieve your study goals</p>
       
+      <!-- UPDATED: Compact Controls Bar -->
       <div class="controls-bar">
         <button class="btn btn-success" onclick="window.location.href='index.html'">
-    Home
-</button>
+          Home
+        </button>
         <button class="btn btn-success" onclick="showSection('myclasses')">🎓 Manage Classes</button>
         <button class="btn btn-secondary" onclick="refreshData()">🔄 Refresh</button>
         <button class="btn btn-warning" onclick="exportData()">📤 Export Data</button>
@@ -2525,7 +2773,7 @@ textarea {
           Mark your study streak daily! Consistency beats intensity. Even 15 minutes of focused study each day builds a strong habit and improves retention by 60% compared to cramming.
         </div>
         
-        <!-- Quick Stats -->
+        <!-- UPDATED: Compact Quick Stats -->
         <div class="quick-stats">
           <div class="stat-card">
             <div class="stat-icon">🔥</div>
@@ -2638,7 +2886,7 @@ textarea {
                 </div>
 
                 <div class="task-input-container" style="display: flex; gap: var(--spacing-sm); margin-bottom: var(--spacing-lg);">
-                  <input type="text" id="taskInput" placeholder="Add a new task..." style="flex: 1;">
+                  <input type="text" id="taskInput" placeholder="Add a new task..." style="flex: 1; min-width: 0;">
                   <button class="btn btn-success" onclick="addTask()">➕ Add</button>
                 </div>
                 <!-- Add this AFTER the task input container in the Dashboard section -->
@@ -2945,192 +3193,239 @@ textarea {
         </div>
       </div>
       
-      <!-- Statistics Section - ENHANCED (not replaced) -->
+      <!-- UPDATED: Enhanced Statistics Section -->
       <div id="statistics" class="dashboard-content" style="grid-column: span 12; display: none;">
-        <div class="content-card">
-          <div class="content-header">
+        <div class="statistics-grid">
+          <!-- Statistics Header -->
+          <div class="statistics-header">
             <h2>📈 Learning Statistics</h2>
-            <div style="display: flex; gap: var(--spacing-sm); flex-wrap: wrap;">
-              <button class="btn btn-primary" onclick="refreshCharts()">🔄 Refresh Charts</button>
-              <button class="btn btn-secondary" onclick="exportStatistics()">📥 Export Stats</button>
-              <button class="btn btn-success" onclick="markStudySession()">📝 Mark Study Session</button>
+            <div class="statistics-subtitle">Visualize your progress with detailed charts and insights</div>
+            <div class="stats-controls">
+              <button class="btn btn-primary" onclick="refreshCharts()">
+                🔄 Refresh Charts
+              </button>
+              <button class="btn btn-secondary" onclick="exportStatistics()">
+                📥 Export Stats
+              </button>
+              <button class="btn btn-success" onclick="markStudySession()">
+                📝 Mark Study Session
+              </button>
             </div>
           </div>
-          <div class="content-body">
-            <!-- Pro Tip -->
-            <div class="pro-tip">
-              <strong>💡 Data-Driven Learning</strong>
-              Review your statistics weekly to identify patterns. Track what study methods work best for you and adjust accordingly. Students who review their data improve 25% faster than those who don't.
-            </div>
-            
-            <!-- NEW: Daily Stats Overview -->
-            <div class="daily-stats-grid">
-              <div class="daily-stat-card">
-                <div class="daily-stat-number" id="todayFocusScore">0%</div>
-                <div class="daily-stat-label">Today's Focus Score</div>
-                <div class="daily-stat-trend" id="focusTrend">
-                  <span>📈</span>
-                  <span>Loading...</span>
-                </div>
-              </div>
-              <div class="daily-stat-card">
-                <div class="daily-stat-number" id="todaySessions">0</div>
-                <div class="daily-stat-label">Today's Study Sessions</div>
-                <div class="daily-stat-trend" id="sessionsTrend">
-                  <span>📊</span>
-                  <span>Loading...</span>
-                </div>
-              </div>
-              <div class="daily-stat-card">
-                <div class="daily-stat-number" id="todayConsistency">0%</div>
-                <div class="daily-stat-label">Consistency Score</div>
-                <div class="daily-stat-trend" id="consistencyTrend">
-                  <span>🔥</span>
-                  <span>Loading...</span>
-                </div>
+          
+          <!-- Pro Tip -->
+          <div class="pro-tip" style="grid-column: span 12;">
+            <strong>💡 Data-Driven Learning</strong>
+            Review your statistics weekly to identify patterns. Track what study methods work best for you and adjust accordingly. Students who review their data improve 25% faster than those who don't.
+          </div>
+          
+          <!-- Overview Cards -->
+          <div class="stats-overview-cards">
+            <div class="stats-overview-card">
+              <div class="stats-overview-icon">🔥</div>
+              <div class="stats-overview-number" id="overviewStreak">0</div>
+              <div class="stats-overview-label">Study Streak</div>
+              <div class="stats-overview-trend neutral" id="streakTrend">
+                <span>➡️</span>
+                <span>Maintain daily study</span>
               </div>
             </div>
-            
-            <!-- Summary Statistics - KEPT -->
-            <div class="stat-summary-grid">
-              <div class="stat-summary-card">
-                <div class="stat-summary-number" id="statsTotalHours">0</div>
-                <div class="stat-summary-label">Total Study Hours</div>
-                <div class="stat-summary-details" id="statsHoursDetails">Loading...</div>
-              </div>
-              <div class="stat-summary-card">
-                <div class="stat-summary-number" id="statsStreak">0</div>
-                <div class="stat-summary-label">Current Streak</div>
-                <div class="stat-summary-details" id="statsStreakDetails">Loading...</div>
-              </div>
-              <div class="stat-summary-card">
-                <div class="stat-summary-number" id="statsTaskRate">0%</div>
-                <div class="stat-summary-label">Task Completion</div>
-                <div class="stat-summary-details" id="statsTaskDetails">Loading...</div>
-              </div>
-              <div class="stat-summary-card">
-                <div class="stat-summary-number" id="statsFocusScore">0%</div>
-                <div class="stat-summary-label">Focus Score</div>
-                <div class="stat-summary-details" id="statsFocusDetails">Loading...</div>
+            <div class="stats-overview-card">
+              <div class="stats-overview-icon">⏰</div>
+              <div class="stats-overview-number" id="overviewHours">0</div>
+              <div class="stats-overview-label">Study Hours</div>
+              <div class="stats-overview-trend neutral" id="hoursTrend">
+                <span>➡️</span>
+                <span>Track your sessions</span>
               </div>
             </div>
+            <div class="stats-overview-card">
+              <div class="stats-overview-icon">✅</div>
+              <div class="stats-overview-number" id="overviewTasks">0</div>
+              <div class="stats-overview-label">Tasks Completed</div>
+              <div class="stats-overview-trend neutral" id="tasksTrend">
+                <span>➡️</span>
+                <span>Complete more tasks</span>
+              </div>
+            </div>
+            <div class="stats-overview-card">
+              <div class="stats-overview-icon">🎯</div>
+              <div class="stats-overview-number" id="overviewFocus">0%</div>
+              <div class="stats-overview-label">Focus Score</div>
+              <div class="stats-overview-trend neutral" id="focusTrend">
+                <span>➡️</span>
+                <span>Improve consistency</span>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Performance Metrics -->
+          <div class="performance-metrics">
+            <h3>📊 Performance Metrics</h3>
+            <div class="metrics-grid">
+              <div class="metric-card">
+                <div class="metric-icon">📅</div>
+                <div class="metric-value" id="metricSessions">0</div>
+                <div class="metric-label">Study Sessions</div>
+                <div class="metric-details">This week</div>
+              </div>
+              <div class="metric-card">
+                <div class="metric-icon">⚡</div>
+                <div class="metric-value" id="metricAvgHours">0h</div>
+                <div class="metric-label">Avg. Daily Hours</div>
+                <div class="metric-details">Based on last 7 days</div>
+              </div>
+              <div class="metric-card">
+                <div class="metric-icon">🏆</div>
+                <div class="metric-value" id="metricLongestStreak">0</div>
+                <div class="metric-label">Longest Streak</div>
+                <div class="metric-details">All-time record</div>
+              </div>
+              <div class="metric-card">
+                <div class="metric-icon">📈</div>
+                <div class="metric-value" id="metricConsistency">0%</div>
+                <div class="metric-label">Consistency</div>
+                <div class="metric-details">Study regularity</div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Charts Section -->
+          <div class="charts-container">
+            <!-- Study Hours Chart -->
+            <div class="chart-card">
+              <div class="chart-header">
+                <h3>⏰ Study Hours Distribution</h3>
+                <div class="chart-description">Daily study hours over the past week</div>
+              </div>
+              <div class="chart-wrapper">
+                <canvas id="hoursChart"></canvas>
+              </div>
+              <div class="chart-legend" id="hoursLegend"></div>
+            </div>
             
-            <!-- NEW: Daily Statistics Charts -->
-            <div class="charts-container">
-              <!-- Focus Score Chart -->
-              <div class="chart-card">
+            <!-- Focus Score Chart -->
+            <div class="chart-card">
+              <div class="chart-header">
                 <h3>🎯 Daily Focus Score</h3>
-                <div class="chart-wrapper">
-                  <canvas id="focusChart"></canvas>
-                </div>
+                <div class="chart-description">Daily focus scores based on consistency</div>
               </div>
-              
-              <!-- Study Sessions Chart -->
-              <div class="chart-card">
-                <h3>📚 Daily Study Sessions</h3>
-                <div class="chart-wrapper">
-                  <canvas id="sessionsChart"></canvas>
-                </div>
+              <div class="chart-wrapper">
+                <canvas id="focusChart"></canvas>
               </div>
-              
-              <!-- Consistency Score Chart -->
-              <div class="chart-card">
-                <h3>📊 Daily Consistency Score</h3>
-                <div class="chart-wrapper">
-                  <canvas id="consistencyChart"></canvas>
-                </div>
-              </div>
-              
-              <!-- KEEP ALL EXISTING CHARTS -->
-              <!-- Study Hours Distribution -->
-              <div class="chart-card">
-                <h3>📊 Study Hours Distribution</h3>
-                <div class="chart-wrapper">
-                  <canvas id="hoursChart"></canvas>
-                </div>
-              </div>
-              
-              <!-- Task Completion Rate -->
-              <div class="chart-card">
-                <h3>✅ Task Completion Progress</h3>
-                <div class="chart-wrapper">
-                  <canvas id="tasksChart"></canvas>
-                </div>
-              </div>
-              
-              <!-- Weekly Study Pattern -->
-              <div class="chart-card comparison-chart">
-                <h3>📅 Weekly Study Pattern</h3>
-                <div class="chart-wrapper">
-                  <canvas id="weeklyChart"></canvas>
-                </div>
-              </div>
-              
-              <!-- Assignment Status -->
-              <div class="chart-card">
-                <h3>📚 Assignment Status</h3>
-                <div class="chart-wrapper">
-                  <canvas id="assignmentsChart"></canvas>
-                </div>
-              </div>
-              
-              <!-- Streak History -->
-              <div class="chart-card">
-                <h3>🔥 Streak History</h3>
-                <div class="chart-wrapper">
-                  <canvas id="streakChart"></canvas>
-                </div>
-              </div>
+              <div class="chart-legend" id="focusLegend"></div>
             </div>
             
-            <!-- KEEP Detailed Statistics -->
-            <div style="margin-top: var(--spacing-xl); padding: var(--spacing-lg); background: var(--bg); border-radius: var(--radius); border: 1px solid var(--border);">
-              <h3 style="margin-bottom: var(--spacing-lg);">📋 Detailed Performance Metrics</h3>
-              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: var(--spacing-lg);">
-                <div>
-                  <h4 style="margin-bottom: var(--spacing-sm); color: var(--text-muted);">Productivity Metrics</h4>
-                  <div class="stat-row">
-                    <span>Average Daily Hours</span>
-                    <span class="stat-value" id="avgDailyHours">0</span>
-                  </div>
-                  <div class="stat-row">
-                    <span>Study Sessions</span>
-                    <span class="stat-value" id="totalSessions">0</span>
-                  </div>
-                  <div class="stat-row">
-                    <span>Longest Session</span>
-                    <span class="stat-value" id="longestSession">0h</span>
-                  </div>
+            <!-- Task Completion Chart -->
+            <div class="chart-card">
+              <div class="chart-header">
+                <h3>✅ Task Completion</h3>
+                <div class="chart-description">Task completion rate and progress</div>
+              </div>
+              <div class="chart-wrapper">
+                <canvas id="tasksChart"></canvas>
+              </div>
+              <div class="chart-legend" id="tasksLegend"></div>
+            </div>
+            
+            <!-- Weekly Pattern Chart -->
+            <div class="chart-card">
+              <div class="chart-header">
+                <h3>📅 Weekly Study Pattern</h3>
+                <div class="chart-description">Study distribution across days of the week</div>
+              </div>
+              <div class="chart-wrapper">
+                <canvas id="weeklyChart"></canvas>
+              </div>
+              <div class="chart-legend" id="weeklyLegend"></div>
+            </div>
+            
+            <!-- Assignment Status Chart -->
+            <div class="chart-card">
+              <div class="chart-header">
+                <h3>📚 Assignment Status</h3>
+                <div class="chart-description">Current assignment completion status</div>
+              </div>
+              <div class="chart-wrapper">
+                <canvas id="assignmentsChart"></canvas>
+              </div>
+              <div class="chart-legend" id="assignmentsLegend"></div>
+            </div>
+            
+            <!-- Streak History Chart -->
+            <div class="chart-card">
+              <div class="chart-header">
+                <h3>🔥 Streak History</h3>
+                <div class="chart-description">Daily streak progression over time</div>
+              </div>
+              <div class="chart-wrapper">
+                <canvas id="streakChart"></canvas>
+              </div>
+              <div class="chart-legend" id="streakLegend"></div>
+            </div>
+          </div>
+          
+          <!-- Detailed Statistics -->
+          <div class="stats-detailed-container">
+            <h3>📋 Detailed Performance Analysis</h3>
+            <div class="stats-detailed-grid">
+              <div class="stats-detailed-section">
+                <h4>Productivity Metrics</h4>
+                <div class="stats-detailed-row">
+                  <span class="stats-detailed-label">Total Study Hours</span>
+                  <span class="stats-detailed-value" id="detailTotalHours">0</span>
                 </div>
-                <div>
-                  <h4 style="margin-bottom: var(--spacing-sm); color: var(--text-muted);">Task Metrics</h4>
-                  <div class="stat-row">
-                    <span>Avg. Tasks/Day</span>
-                    <span class="stat-value" id="avgTasksPerDay">0</span>
-                  </div>
-                  <div class="stat-row">
-                    <span>Fastest Completion</span>
-                    <span class="stat-value" id="fastestCompletion">0h</span>
-                  </div>
-                  <div class="stat-row">
-                    <span>Active Tasks</span>
-                    <span class="stat-value" id="activeTasksCount">0</span>
-                  </div>
+                <div class="stats-detailed-row">
+                  <span class="stats-detailed-label">Study Sessions</span>
+                  <span class="stats-detailed-value" id="detailTotalSessions">0</span>
                 </div>
-                <div>
-                  <h4 style="margin-bottom: var(--spacing-sm); color: var(--text-muted);">Achievement Metrics</h4>
-                  <div class="stat-row">
-                    <span>Total Points</span>
-                    <span class="stat-value" id="totalPoints">0</span>
-                  </div>
-                  <div class="stat-row">
-                    <span>Longest Streak</span>
-                    <span class="stat-value" id="longestStreak">0</span>
-                  </div>
-                  <div class="stat-row">
-                    <span>Consistency Score</span>
-                    <span class="stat-value" id="consistencyScore">0%</span>
-                  </div>
+                <div class="stats-detailed-row">
+                  <span class="stats-detailed-label">Avg. Session Length</span>
+                  <span class="stats-detailed-value" id="detailAvgSession">0h</span>
+                </div>
+                <div class="stats-detailed-row">
+                  <span class="stats-detailed-label">Longest Session</span>
+                  <span class="stats-detailed-value" id="detailLongestSession">0h</span>
+                </div>
+              </div>
+              
+              <div class="stats-detailed-section">
+                <h4>Task Metrics</h4>
+                <div class="stats-detailed-row">
+                  <span class="stats-detailed-label">Total Tasks</span>
+                  <span class="stats-detailed-value" id="detailTotalTasks">0</span>
+                </div>
+                <div class="stats-detailed-row">
+                  <span class="stats-detailed-label">Completed Tasks</span>
+                  <span class="stats-detailed-value" id="detailCompletedTasks">0</span>
+                </div>
+                <div class="stats-detailed-row">
+                  <span class="stats-detailed-label">Completion Rate</span>
+                  <span class="stats-detailed-value" id="detailCompletionRate">0%</span>
+                </div>
+                <div class="stats-detailed-row">
+                  <span class="stats-detailed-label">Active Tasks</span>
+                  <span class="stats-detailed-value" id="detailActiveTasks">0</span>
+                </div>
+              </div>
+              
+              <div class="stats-detailed-section">
+                <h4>Achievement Metrics</h4>
+                <div class="stats-detailed-row">
+                  <span class="stats-detailed-label">Current Streak</span>
+                  <span class="stats-detailed-value" id="detailCurrentStreak">0</span>
+                </div>
+                <div class="stats-detailed-row">
+                  <span class="stats-detailed-label">Longest Streak</span>
+                  <span class="stats-detailed-value" id="detailLongestStreak">0</span>
+                </div>
+                <div class="stats-detailed-row">
+                  <span class="stats-detailed-label">Focus Score</span>
+                  <span class="stats-detailed-value" id="detailFocusScore">0%</span>
+                </div>
+                <div class="stats-detailed-row">
+                  <span class="stats-detailed-label">Consistency Score</span>
+                  <span class="stats-detailed-value" id="detailConsistencyScore">0%</span>
                 </div>
               </div>
             </div>
@@ -3425,8 +3720,6 @@ let weeklyChart = null;
 let assignmentsChart = null;
 let streakChart = null;
 let focusChart = null;
-let sessionsChart = null;
-let consistencyChart = null;
 
 // Chart auto-refresh interval
 let chartRefreshInterval = null;
@@ -3562,7 +3855,7 @@ const inspiringStories = [
         name: "Malala Yousafzai",
         icon: "📚",
         quote: "One child, one teacher, one book, one pen can change the world.",
-        story: "Malala Yousafzai was shot in the head by the Taliban at age 15 for advocating for girls' education in Pakistan. She survived the attack and continued her activism, becoming the youngest-ever Nobel Prize laureate at age 17. Her recovery involved multiple surgeries and rehabilitation in the UK. Today, she continues to fight for education rights through the Malala Fund, which supports education programs around the world.",
+        story: "Malala Yousafzai was shot in the head by the Taliban at age 15 for advocating for girls' education in Pakistan. She survived the attack and continued her activism, becoming the youngest-ever Nobel Prize laurete at age 17. Her recovery involved multiple surgeries and rehabilitation in the UK. Today, she continues to fight for education rights through the Malala Fund, which supports education programs around the world.",
         struggles: [
             "Shot by Taliban at age 15",
             "Faced death threats for advocating education",
@@ -3605,7 +3898,7 @@ const inspiringStories = [
 function persistData() {
     try {
         const dataToSave = {
-            version: "2.4", // Updated version
+            version: "2.5", // Updated version
             lastSaved: new Date().toISOString(),
             userId: currentUserId,
             userName: currentUserName,
@@ -3638,7 +3931,7 @@ function loadPersistedData() {
             const data = JSON.parse(savedData);
             
             // Check version compatibility
-            if (data.version && (data.version === "2.4" || data.version === "2.3" || data.version === "2.2" || data.version === "2.1" || data.version === "2.0")) {
+            if (data.version && (data.version === "2.5" || data.version === "2.4" || data.version === "2.3" || data.version === "2.2" || data.version === "2.1" || data.version === "2.0")) {
                 console.log("📂 Loading persisted data version:", data.version);
                 
                 // Load study data with safety checks
@@ -4194,7 +4487,7 @@ async function markStudyToday() {
     updateUI();
     updateSidebarStats();
     updateStreakUI();
-    updateDailyStatsOverview();
+    updateAllStatistics();
     
     updateSyncStatus("Saving to all classes...", "syncing");
     await saveStudyDataToFirebase();
@@ -4387,7 +4680,7 @@ async function addStudyHours() {
     persistData();
     updateUI();
     updateSidebarStats();
-    updateDailyStatsOverview();
+    updateAllStatistics();
     input.value = "";
     
     updateSyncStatus("Syncing to all classes...", "syncing");
@@ -4831,7 +5124,7 @@ function hideAssignmentForm() {
     if (form) form.style.display = 'none';
 }
 
-// ========== STATISTICS SECTION - FIXED ==========
+// ========== UPDATED STATISTICS SECTION ==========
 function markStudySession() {
     const today = new Date().toDateString();
     
@@ -4848,8 +5141,6 @@ function markStudySession() {
     // Initialize arrays if they don't exist
     if (!studyData.studySessions) studyData.studySessions = [];
     if (!studyData.dailyStats) studyData.dailyStats = [];
-    if (!studyData.focusScores) studyData.focusScores = [];
-    if (!studyData.consistencyScores) studyData.consistencyScores = [];
     
     // Update study sessions
     studyData.studySessions.unshift({
@@ -4876,24 +5167,8 @@ function markStudySession() {
             consistencyScore: consistencyScore
         });
         
-        studyData.focusScores.unshift({
-            date: today,
-            score: focusScore
-        });
-        
-        studyData.consistencyScores.unshift({
-            date: today,
-            score: consistencyScore
-        });
-        
         if (studyData.dailyStats.length > 30) {
             studyData.dailyStats = studyData.dailyStats.slice(0, 30);
-        }
-        if (studyData.focusScores.length > 30) {
-            studyData.focusScores = studyData.focusScores.slice(0, 30);
-        }
-        if (studyData.consistencyScores.length > 30) {
-            studyData.consistencyScores = studyData.consistencyScores.slice(0, 30);
         }
     }
     
@@ -4904,7 +5179,6 @@ function markStudySession() {
     persistData();
     updateCharts();
     updateAllStatistics();
-    updateDailyStatsOverview();
     
     showNotification(`Study session recorded! ${hours} hours studied.`, "success");
 }
@@ -4919,14 +5193,31 @@ function calculateConsistencyScore() {
     return Math.min(100, Math.floor((daysStudied / totalDays) * 100));
 }
 
-function updateDailyStatsOverview() {
-    const today = new Date().toDateString();
-    if (!studyData.dailyStats) studyData.dailyStats = [];
-    const todayStats = studyData.dailyStats.find(s => s.date === today);
+function updateCharts() {
+    // Destroy existing charts
+    if (hoursChart) hoursChart.destroy();
+    if (tasksChart) tasksChart.destroy();
+    if (weeklyChart) weeklyChart.destroy();
+    if (assignmentsChart) assignmentsChart.destroy();
+    if (streakChart) streakChart.destroy();
+    if (focusChart) focusChart.destroy();
     
-    document.getElementById('todayFocusScore').textContent = todayStats ? `${todayStats.focusScore || 0}%` : '0%';
-    document.getElementById('todaySessions').textContent = todayStats ? todayStats.sessions || 0 : '0';
-    document.getElementById('todayConsistency').textContent = todayStats ? `${todayStats.consistencyScore || 0}%` : '0%';
+    updateOverviewCards();
+    updatePerformanceMetrics();
+    updateDetailedStats();
+    createHoursChart();
+    createTasksChart();
+    createWeeklyChart();
+    createAssignmentsChart();
+    createStreakChart();
+    createFocusChart();
+}
+
+function updateOverviewCards() {
+    document.getElementById('overviewStreak').textContent = studyData.streak || 0;
+    document.getElementById('overviewHours').textContent = parseFloat(studyData.totalStudyHours || 0).toFixed(1);
+    document.getElementById('overviewTasks').textContent = tasks.filter(t => t.completed).length;
+    document.getElementById('overviewFocus').textContent = `${calculateFocusScore()}%`;
     
     updateTrends();
 }
@@ -4934,184 +5225,116 @@ function updateDailyStatsOverview() {
 function updateTrends() {
     if (!studyData.dailyStats || studyData.dailyStats.length < 2) return;
     
-    const today = studyData.dailyStats[0];
-    const yesterday = studyData.dailyStats[1];
+    const today = studyData.dailyStats[0] || {};
+    const yesterday = studyData.dailyStats[1] || {};
     
-    updateTrend('focus', today ? (today.focusScore || 0) : 0, yesterday ? (yesterday.focusScore || 0) : 0, 'focusTrend');
-    updateTrend('sessions', today ? (today.sessions || 0) : 0, yesterday ? (yesterday.sessions || 0) : 0, 'sessionsTrend');
-    updateTrend('consistency', today ? (today.consistencyScore || 0) : 0, yesterday ? (yesterday.consistencyScore || 0) : 0, 'consistencyTrend');
+    // Update streak trend
+    const streakTrend = document.getElementById('streakTrend');
+    const streakDiff = (studyData.streak || 0) - (yesterday.streak || 0);
+    updateTrendElement(streakTrend, streakDiff, "days streak");
+    
+    // Update hours trend
+    const hoursTrend = document.getElementById('hoursTrend');
+    const hoursDiff = (today.hours || 0) - (yesterday.hours || 0);
+    updateTrendElement(hoursTrend, hoursDiff, "hours");
+    
+    // Update tasks trend
+    const tasksTrend = document.getElementById('tasksTrend');
+    const todayCompleted = tasks.filter(t => {
+        if (!t.completedAt) return false;
+        const completedDate = new Date(t.completedAt).toDateString();
+        return completedDate === new Date().toDateString();
+    }).length;
+    const yesterdayCompleted = tasks.filter(t => {
+        if (!t.completedAt) return false;
+        const completedDate = new Date(t.completedAt).toDateString();
+        const yesterday = new Date();
+        yesterday.setDate(yesterday.getDate() - 1);
+        return completedDate === yesterday.toDateString();
+    }).length;
+    const tasksDiff = todayCompleted - yesterdayCompleted;
+    updateTrendElement(tasksTrend, tasksDiff, "tasks");
+    
+    // Update focus trend
+    const focusTrend = document.getElementById('focusTrend');
+    const focusDiff = (today.focusScore || calculateFocusScore()) - (yesterday.focusScore || calculateFocusScore());
+    updateTrendElement(focusTrend, focusDiff, "% focus");
 }
 
-function updateTrend(type, todayValue, yesterdayValue, elementId) {
-    const element = document.getElementById(elementId);
+function updateTrendElement(element, diff, label) {
     if (!element) return;
     
-    const diff = todayValue - yesterdayValue;
-    let trendIcon = '➡️';
-    let trendText = 'No change';
-    let trendClass = 'trend-neutral';
+    let trendClass = 'neutral';
+    let icon = '➡️';
+    let text = 'No change';
     
     if (diff > 0) {
-        trendIcon = '📈';
-        trendText = `+${diff} from yesterday`;
-        trendClass = 'trend-up';
+        trendClass = 'up';
+        icon = '📈';
+        text = `+${diff} ${label}`;
     } else if (diff < 0) {
-        trendIcon = '📉';
-        trendText = `${diff} from yesterday`;
-        trendClass = 'trend-down';
+        trendClass = 'down';
+        icon = '📉';
+        text = `${diff} ${label}`;
     }
     
-    element.innerHTML = `<span>${trendIcon}</span><span>${trendText}</span>`;
-    element.className = `daily-stat-trend ${trendClass}`;
+    element.className = `stats-overview-trend ${trendClass}`;
+    element.innerHTML = `<span>${icon}</span><span>${text}</span>`;
 }
 
-function updateCharts() {
-    // Destroy existing charts
-    if (focusChart) focusChart.destroy();
-    if (sessionsChart) sessionsChart.destroy();
-    if (consistencyChart) consistencyChart.destroy();
-    if (hoursChart) hoursChart.destroy();
-    if (tasksChart) tasksChart.destroy();
-    if (weeklyChart) weeklyChart.destroy();
-    if (assignmentsChart) assignmentsChart.destroy();
-    if (streakChart) streakChart.destroy();
+function updatePerformanceMetrics() {
+    // Study sessions this week
+    const thisWeekSessions = studyData.dailyStats ? 
+        studyData.dailyStats.slice(0, 7).reduce((sum, day) => sum + (day.sessions || 0), 0) : 0;
+    document.getElementById('metricSessions').textContent = thisWeekSessions;
     
-    updateStatisticsSummary();
-    updateDailyStatsOverview();
+    // Average daily hours
+    const avgDailyHours = studyData.totalStudyDays > 0 ? 
+        (parseFloat(studyData.totalStudyHours || 0) / studyData.totalStudyDays).toFixed(1) : 0;
+    document.getElementById('metricAvgHours').textContent = `${avgDailyHours}h`;
     
-    // Create new charts
-    createDailyStatsCharts();
-    createHoursChart();
-    createTasksChart();
-    createWeeklyChart();
-    createAssignmentsChart();
-    createStreakChart();
+    // Longest streak
+    const longestStreak = studyData.streakHistory ? 
+        Math.max(...studyData.streakHistory.map(s => s.streak || 0), studyData.streak || 0) : studyData.streak || 0;
+    document.getElementById('metricLongestStreak').textContent = longestStreak;
+    
+    // Consistency score
+    const consistencyScore = calculateConsistencyScore();
+    document.getElementById('metricConsistency').textContent = `${consistencyScore}%`;
 }
 
-function createDailyStatsCharts() {
-    const last7Days = Array.from({length: 7}, (_, i) => {
-        const date = new Date();
-        date.setDate(date.getDate() - i);
-        return date.toDateString();
-    }).reverse();
+function updateDetailedStats() {
+    // Productivity Metrics
+    document.getElementById('detailTotalHours').textContent = parseFloat(studyData.totalStudyHours || 0).toFixed(1);
+    document.getElementById('detailTotalSessions').textContent = studyData.studySessions ? studyData.studySessions.length : 0;
     
-    // Ensure arrays exist
-    if (!studyData.dailyStats) studyData.dailyStats = [];
+    const avgSessionLength = studyData.studySessions && studyData.studySessions.length > 0 ? 
+        (parseFloat(studyData.totalStudyHours || 0) / studyData.studySessions.length).toFixed(1) : 0;
+    document.getElementById('detailAvgSession').textContent = `${avgSessionLength}h`;
     
-    const focusData = last7Days.map(day => {
-        const stat = studyData.dailyStats.find(s => s.date === day);
-        return stat ? (stat.focusScore || 0) : 0;
-    });
+    const longestSession = studyData.studySessions && studyData.studySessions.length > 0 ? 
+        Math.max(...studyData.studySessions.map(s => s.hours || 0)) : 0;
+    document.getElementById('detailLongestSession').textContent = `${longestSession.toFixed(1)}h`;
     
-    const sessionsData = last7Days.map(day => {
-        const stat = studyData.dailyStats.find(s => s.date === day);
-        return stat ? (stat.sessions || 0) : 0;
-    });
+    // Task Metrics
+    document.getElementById('detailTotalTasks').textContent = tasks.length;
+    document.getElementById('detailCompletedTasks').textContent = tasks.filter(t => t.completed).length;
     
-    const consistencyData = last7Days.map(day => {
-        const stat = studyData.dailyStats.find(s => s.date === day);
-        return stat ? (stat.consistencyScore || 0) : 0;
-    });
+    const completionRate = tasks.length > 0 ? 
+        Math.round((tasks.filter(t => t.completed).length / tasks.length) * 100) : 0;
+    document.getElementById('detailCompletionRate').textContent = `${completionRate}%`;
     
-    const formattedDates = last7Days.map(date => {
-        const d = new Date(date);
-        return d.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
-    });
+    document.getElementById('detailActiveTasks').textContent = tasks.filter(t => !t.completed).length;
     
-    // Focus Chart
-    const focusCtx = document.getElementById('focusChart');
-    if (focusCtx) {
-        focusChart = new Chart(focusCtx.getContext('2d'), {
-            type: 'bar',
-            data: {
-                labels: formattedDates,
-                datasets: [{
-                    label: 'Focus Score (%)',
-                    data: focusData,
-                    backgroundColor: 'rgba(79, 70, 229, 0.7)',
-                    borderColor: 'rgba(79, 70, 229, 1)',
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        max: 100,
-                        title: {
-                            display: true,
-                            text: 'Score (%)'
-                        }
-                    }
-                }
-            }
-        });
-    }
+    // Achievement Metrics
+    document.getElementById('detailCurrentStreak').textContent = studyData.streak || 0;
     
-    // Sessions Chart
-    const sessionsCtx = document.getElementById('sessionsChart');
-    if (sessionsCtx) {
-        sessionsChart = new Chart(sessionsCtx.getContext('2d'), {
-            type: 'bar',
-            data: {
-                labels: formattedDates,
-                datasets: [{
-                    label: 'Study Sessions',
-                    data: sessionsData,
-                    backgroundColor: 'rgba(16, 185, 129, 0.7)',
-                    borderColor: 'rgba(16, 185, 129, 1)',
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        title: {
-                            display: true,
-                            text: 'Sessions'
-                        }
-                    }
-                }
-            }
-        });
-    }
+    const longestStreak = studyData.streakHistory ? 
+        Math.max(...studyData.streakHistory.map(s => s.streak || 0), studyData.streak || 0) : studyData.streak || 0;
+    document.getElementById('detailLongestStreak').textContent = longestStreak;
     
-    // Consistency Chart
-    const consistencyCtx = document.getElementById('consistencyChart');
-    if (consistencyCtx) {
-        consistencyChart = new Chart(consistencyCtx.getContext('2d'), {
-            type: 'bar',
-            data: {
-                labels: formattedDates,
-                datasets: [{
-                    label: 'Consistency Score (%)',
-                    data: consistencyData,
-                    backgroundColor: 'rgba(245, 158, 11, 0.7)',
-                    borderColor: 'rgba(245, 158, 11, 1)',
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        max: 100,
-                        title: {
-                            display: true,
-                            text: 'Score (%)'
-                        }
-                    }
-                }
-            }
-        });
-    }
+    document.getElementById('detailFocusScore').textContent = `${calculateFocusScore()}%`;
+    document.getElementById('detailConsistencyScore').textContent = `${calculateConsistencyScore()}%`;
 }
 
 function createHoursChart() {
@@ -5134,38 +5357,94 @@ function createHoursChart() {
         return daySessions.reduce((sum, session) => sum + (session.hours || 0), 0);
     });
     
+    // Theme-adaptive colors
+    const barColor = getComputedStyle(document.documentElement).getPropertyValue('--accent');
+    const borderColor = getComputedStyle(document.documentElement).getPropertyValue('--accent-dark');
+    
     hoursChart = new Chart(ctx.getContext('2d'), {
         type: 'bar',
         data: {
-            labels: last7Days.map(date => new Date(date).toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' })),
+            labels: last7Days.map(date => {
+                const d = new Date(date);
+                return d.toLocaleDateString('en-US', { weekday: 'short' });
+            }),
             datasets: [{
                 label: 'Study Hours',
                 data: dailyHours,
-                backgroundColor: 'rgba(79, 70, 229, 0.7)',
-                borderColor: 'rgba(79, 70, 229, 1)',
-                borderWidth: 1
+                backgroundColor: barColor + '80', // 50% opacity
+                borderColor: borderColor,
+                borderWidth: 1,
+                borderRadius: 4
             }]
         },
         options: {
             responsive: true,
             maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    display: true,
+                    position: 'top',
+                    labels: {
+                        color: getComputedStyle(document.documentElement).getPropertyValue('--text'),
+                        font: {
+                            size: 12
+                        }
+                    }
+                },
+                tooltip: {
+                    backgroundColor: getComputedStyle(document.documentElement).getPropertyValue('--card'),
+                    titleColor: getComputedStyle(document.documentElement).getPropertyValue('--text'),
+                    bodyColor: getComputedStyle(document.documentElement).getPropertyValue('--text-muted'),
+                    borderColor: getComputedStyle(document.documentElement).getPropertyValue('--border'),
+                    borderWidth: 1
+                }
+            },
             scales: {
                 y: {
                     beginAtZero: true,
+                    grid: {
+                        color: getComputedStyle(document.documentElement).getPropertyValue('--border') + '40'
+                    },
+                    ticks: {
+                        color: getComputedStyle(document.documentElement).getPropertyValue('--text-muted'),
+                        font: {
+                            size: 11
+                        }
+                    },
                     title: {
                         display: true,
-                        text: 'Hours'
+                        text: 'Hours',
+                        color: getComputedStyle(document.documentElement).getPropertyValue('--text-muted'),
+                        font: {
+                            size: 12
+                        }
                     }
                 },
                 x: {
-                    title: {
-                        display: true,
-                        text: 'Date'
+                    grid: {
+                        color: getComputedStyle(document.documentElement).getPropertyValue('--border') + '40'
+                    },
+                    ticks: {
+                        color: getComputedStyle(document.documentElement).getPropertyValue('--text-muted'),
+                        font: {
+                            size: 11
+                        }
                     }
                 }
             }
         }
     });
+    
+    // Update legend
+    const legend = document.getElementById('hoursLegend');
+    if (legend) {
+        legend.innerHTML = `
+            <div class="legend-item">
+                <div class="legend-color" style="background: ${barColor};"></div>
+                <span>Daily Study Hours</span>
+            </div>
+        `;
+    }
 }
 
 function createTasksChart() {
@@ -5175,6 +5454,10 @@ function createTasksChart() {
     const completedTasks = tasks.filter(t => t.completed).length;
     const pendingTasks = tasks.filter(t => !t.completed).length;
     
+    // Theme-adaptive colors
+    const successColor = getComputedStyle(document.documentElement).getPropertyValue('--success');
+    const warningColor = getComputedStyle(document.documentElement).getPropertyValue('--warning');
+    
     tasksChart = new Chart(ctx.getContext('2d'), {
         type: 'doughnut',
         data: {
@@ -5182,12 +5465,12 @@ function createTasksChart() {
             datasets: [{
                 data: [completedTasks, pendingTasks],
                 backgroundColor: [
-                    'rgba(16, 185, 129, 0.7)',
-                    'rgba(245, 158, 11, 0.7)'
+                    successColor + '80',
+                    warningColor + '80'
                 ],
                 borderColor: [
-                    'rgba(16, 185, 129, 1)',
-                    'rgba(245, 158, 11, 1)'
+                    successColor,
+                    warningColor
                 ],
                 borderWidth: 1
             }]
@@ -5195,13 +5478,43 @@ function createTasksChart() {
         options: {
             responsive: true,
             maintainAspectRatio: false,
+            cutout: '70%',
             plugins: {
                 legend: {
-                    position: 'bottom'
+                    position: 'bottom',
+                    labels: {
+                        color: getComputedStyle(document.documentElement).getPropertyValue('--text'),
+                        font: {
+                            size: 11
+                        },
+                        padding: 15
+                    }
+                },
+                tooltip: {
+                    backgroundColor: getComputedStyle(document.documentElement).getPropertyValue('--card'),
+                    titleColor: getComputedStyle(document.documentElement).getPropertyValue('--text'),
+                    bodyColor: getComputedStyle(document.documentElement).getPropertyValue('--text-muted'),
+                    borderColor: getComputedStyle(document.documentElement).getPropertyValue('--border'),
+                    borderWidth: 1
                 }
             }
         }
     });
+    
+    // Update legend
+    const legend = document.getElementById('tasksLegend');
+    if (legend) {
+        legend.innerHTML = `
+            <div class="legend-item">
+                <div class="legend-color" style="background: ${successColor};"></div>
+                <span>Completed Tasks</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color" style="background: ${warningColor};"></div>
+                <span>Pending Tasks</span>
+            </div>
+        `;
+    }
 }
 
 function createWeeklyChart() {
@@ -5212,15 +5525,19 @@ function createWeeklyChart() {
     
     if (!studyData.weeklyPattern) studyData.weeklyPattern = [0, 0, 0, 0, 0, 0, 0];
     
+    // Theme-adaptive colors
+    const lineColor = getComputedStyle(document.documentElement).getPropertyValue('--purple');
+    const fillColor = lineColor + '20';
+    
     weeklyChart = new Chart(ctx.getContext('2d'), {
         type: 'line',
         data: {
             labels: daysOfWeek,
             datasets: [{
-                label: 'Study Hours',
+                label: 'Study Sessions',
                 data: studyData.weeklyPattern,
-                backgroundColor: 'rgba(139, 92, 246, 0.2)',
-                borderColor: 'rgba(139, 92, 246, 1)',
+                backgroundColor: fillColor,
+                borderColor: lineColor,
                 borderWidth: 2,
                 fill: true,
                 tension: 0.4
@@ -5229,17 +5546,71 @@ function createWeeklyChart() {
         options: {
             responsive: true,
             maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    display: true,
+                    position: 'top',
+                    labels: {
+                        color: getComputedStyle(document.documentElement).getPropertyValue('--text'),
+                        font: {
+                            size: 12
+                        }
+                    }
+                },
+                tooltip: {
+                    backgroundColor: getComputedStyle(document.documentElement).getPropertyValue('--card'),
+                    titleColor: getComputedStyle(document.documentElement).getPropertyValue('--text'),
+                    bodyColor: getComputedStyle(document.documentElement).getPropertyValue('--text-muted'),
+                    borderColor: getComputedStyle(document.documentElement).getPropertyValue('--border'),
+                    borderWidth: 1
+                }
+            },
             scales: {
                 y: {
                     beginAtZero: true,
+                    grid: {
+                        color: getComputedStyle(document.documentElement).getPropertyValue('--border') + '40'
+                    },
+                    ticks: {
+                        color: getComputedStyle(document.documentElement).getPropertyValue('--text-muted'),
+                        font: {
+                            size: 11
+                        }
+                    },
                     title: {
                         display: true,
-                        text: 'Study Sessions'
+                        text: 'Sessions',
+                        color: getComputedStyle(document.documentElement).getPropertyValue('--text-muted'),
+                        font: {
+                            size: 12
+                        }
+                    }
+                },
+                x: {
+                    grid: {
+                        color: getComputedStyle(document.documentElement).getPropertyValue('--border') + '40'
+                    },
+                    ticks: {
+                        color: getComputedStyle(document.documentElement).getPropertyValue('--text-muted'),
+                        font: {
+                            size: 11
+                        }
                     }
                 }
             }
         }
     });
+    
+    // Update legend
+    const legend = document.getElementById('weeklyLegend');
+    if (legend) {
+        legend.innerHTML = `
+            <div class="legend-item">
+                <div class="legend-color" style="background: ${lineColor};"></div>
+                <span>Weekly Study Pattern</span>
+            </div>
+        `;
+    }
 }
 
 function createAssignmentsChart() {
@@ -5275,34 +5646,64 @@ function createAssignmentsChart() {
         return diffDays > 3 && !a.completed;
     }).length;
     
+    // Theme-adaptive colors
+    const colors = [
+        getComputedStyle(document.documentElement).getPropertyValue('--danger'),
+        getComputedStyle(document.documentElement).getPropertyValue('--warning'),
+        getComputedStyle(document.documentElement).getPropertyValue('--info'),
+        getComputedStyle(document.documentElement).getPropertyValue('--success'),
+        getComputedStyle(document.documentElement).getPropertyValue('--text-muted')
+    ];
+    
     assignmentsChart = new Chart(ctx.getContext('2d'), {
-        type: 'polarArea',
+        type: 'pie',
         data: {
             labels: ['Overdue', 'Due Today', 'Due Soon', 'Completed', 'Future'],
             datasets: [{
                 data: [overdue, dueToday, dueSoon, completed, future],
-                backgroundColor: [
-                    'rgba(239, 68, 68, 0.7)',
-                    'rgba(245, 158, 11, 0.7)',
-                    'rgba(59, 130, 246, 0.7)',
-                    'rgba(16, 185, 129, 0.7)',
-                    'rgba(156, 163, 175, 0.7)'
-                ],
-                borderColor: [
-                    'rgba(239, 68, 68, 1)',
-                    'rgba(245, 158, 11, 1)',
-                    'rgba(59, 130, 246, 1)',
-                    'rgba(16, 185, 129, 1)',
-                    'rgba(156, 163, 175, 1)'
-                ],
+                backgroundColor: colors.map(color => color + '80'),
+                borderColor: colors,
                 borderWidth: 1
             }]
         },
         options: {
             responsive: true,
-            maintainAspectRatio: false
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    position: 'bottom',
+                    labels: {
+                        color: getComputedStyle(document.documentElement).getPropertyValue('--text'),
+                        font: {
+                            size: 11
+                        },
+                        padding: 15
+                    }
+                },
+                tooltip: {
+                    backgroundColor: getComputedStyle(document.documentElement).getPropertyValue('--card'),
+                    titleColor: getComputedStyle(document.documentElement).getPropertyValue('--text'),
+                    bodyColor: getComputedStyle(document.documentElement).getPropertyValue('--text-muted'),
+                    borderColor: getComputedStyle(document.documentElement).getPropertyValue('--border'),
+                    borderWidth: 1
+                }
+            }
         }
     });
+    
+    // Update legend
+    const legend = document.getElementById('assignmentsLegend');
+    if (legend) {
+        legend.innerHTML = colors.map((color, index) => {
+            const labels = ['Overdue', 'Due Today', 'Due Soon', 'Completed', 'Future'];
+            return `
+                <div class="legend-item">
+                    <div class="legend-color" style="background: ${color};"></div>
+                    <span>${labels[index]}</span>
+                </div>
+            `;
+        }).join('');
+    }
 }
 
 function createStreakChart() {
@@ -5322,127 +5723,215 @@ function createStreakChart() {
         return streakEntry ? streakEntry.streak : 0;
     });
     
+    // Theme-adaptive colors
+    const lineColor = getComputedStyle(document.documentElement).getPropertyValue('--warning');
+    const fillColor = lineColor + '20';
+    
     streakChart = new Chart(ctx.getContext('2d'), {
         type: 'line',
         data: {
-            labels: last14Days.map(date => new Date(date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })),
+            labels: last14Days.map(date => {
+                const d = new Date(date);
+                return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+            }),
             datasets: [{
-                label: 'Streak',
+                label: 'Streak Days',
                 data: streakData,
-                backgroundColor: 'rgba(245, 158, 11, 0.2)',
-                borderColor: 'rgba(245, 158, 11, 1)',
+                backgroundColor: fillColor,
+                borderColor: lineColor,
                 borderWidth: 2,
                 fill: true,
-                tension: 0.4
+                tension: 0.4,
+                pointBackgroundColor: lineColor,
+                pointBorderColor: getComputedStyle(document.documentElement).getPropertyValue('--card'),
+                pointBorderWidth: 2
             }]
         },
         options: {
             responsive: true,
             maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    display: true,
+                    position: 'top',
+                    labels: {
+                        color: getComputedStyle(document.documentElement).getPropertyValue('--text'),
+                        font: {
+                            size: 12
+                        }
+                    }
+                },
+                tooltip: {
+                    backgroundColor: getComputedStyle(document.documentElement).getPropertyValue('--card'),
+                    titleColor: getComputedStyle(document.documentElement).getPropertyValue('--text'),
+                    bodyColor: getComputedStyle(document.documentElement).getPropertyValue('--text-muted'),
+                    borderColor: getComputedStyle(document.documentElement).getPropertyValue('--border'),
+                    borderWidth: 1
+                }
+            },
             scales: {
                 y: {
                     beginAtZero: true,
+                    grid: {
+                        color: getComputedStyle(document.documentElement).getPropertyValue('--border') + '40'
+                    },
+                    ticks: {
+                        color: getComputedStyle(document.documentElement).getPropertyValue('--text-muted'),
+                        font: {
+                            size: 11
+                        }
+                    },
                     title: {
                         display: true,
-                        text: 'Streak Days'
+                        text: 'Days',
+                        color: getComputedStyle(document.documentElement).getPropertyValue('--text-muted'),
+                        font: {
+                            size: 12
+                        }
+                    }
+                },
+                x: {
+                    grid: {
+                        color: getComputedStyle(document.documentElement).getPropertyValue('--border') + '40'
+                    },
+                    ticks: {
+                        color: getComputedStyle(document.documentElement).getPropertyValue('--text-muted'),
+                        font: {
+                            size: 11
+                        }
                     }
                 }
             }
         }
     });
+    
+    // Update legend
+    const legend = document.getElementById('streakLegend');
+    if (legend) {
+        legend.innerHTML = `
+            <div class="legend-item">
+                <div class="legend-color" style="background: ${lineColor};"></div>
+                <span>Daily Streak</span>
+            </div>
+        `;
+    }
+}
+
+function createFocusChart() {
+    const ctx = document.getElementById('focusChart');
+    if (!ctx) return;
+    
+    const last7Days = Array.from({length: 7}, (_, i) => {
+        const date = new Date();
+        date.setDate(date.getDate() - i);
+        return date.toDateString();
+    }).reverse();
+    
+    if (!studyData.focusScores) studyData.focusScores = [];
+    
+    const focusData = last7Days.map(day => {
+        const focusEntry = studyData.focusScores.find(s => s.date === day);
+        return focusEntry ? focusEntry.score : 0;
+    });
+    
+    // Theme-adaptive colors
+    const lineColor = getComputedStyle(document.documentElement).getPropertyValue('--accent');
+    const fillColor = lineColor + '20';
+    
+    focusChart = new Chart(ctx.getContext('2d'), {
+        type: 'line',
+        data: {
+            labels: last7Days.map(date => {
+                const d = new Date(date);
+                return d.toLocaleDateString('en-US', { weekday: 'short' });
+            }),
+            datasets: [{
+                label: 'Focus Score (%)',
+                data: focusData,
+                backgroundColor: fillColor,
+                borderColor: lineColor,
+                borderWidth: 2,
+                fill: true,
+                tension: 0.4,
+                pointBackgroundColor: lineColor,
+                pointBorderColor: getComputedStyle(document.documentElement).getPropertyValue('--card'),
+                pointBorderWidth: 2
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    display: true,
+                    position: 'top',
+                    labels: {
+                        color: getComputedStyle(document.documentElement).getPropertyValue('--text'),
+                        font: {
+                            size: 12
+                        }
+                    }
+                },
+                tooltip: {
+                    backgroundColor: getComputedStyle(document.documentElement).getPropertyValue('--card'),
+                    titleColor: getComputedStyle(document.documentElement).getPropertyValue('--text'),
+                    bodyColor: getComputedStyle(document.documentElement).getPropertyValue('--text-muted'),
+                    borderColor: getComputedStyle(document.documentElement).getPropertyValue('--border'),
+                    borderWidth: 1
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    max: 100,
+                    grid: {
+                        color: getComputedStyle(document.documentElement).getPropertyValue('--border') + '40'
+                    },
+                    ticks: {
+                        color: getComputedStyle(document.documentElement).getPropertyValue('--text-muted'),
+                        font: {
+                            size: 11
+                        }
+                    },
+                    title: {
+                        display: true,
+                        text: 'Score (%)',
+                        color: getComputedStyle(document.documentElement).getPropertyValue('--text-muted'),
+                        font: {
+                            size: 12
+                        }
+                    }
+                },
+                x: {
+                    grid: {
+                        color: getComputedStyle(document.documentElement).getPropertyValue('--border') + '40'
+                    },
+                    ticks: {
+                        color: getComputedStyle(document.documentElement).getPropertyValue('--text-muted'),
+                        font: {
+                            size: 11
+                        }
+                    }
+                }
+            }
+        }
+    });
+    
+    // Update legend
+    const legend = document.getElementById('focusLegend');
+    if (legend) {
+        legend.innerHTML = `
+            <div class="legend-item">
+                <div class="legend-color" style="background: ${lineColor};"></div>
+                <span>Daily Focus Score</span>
+            </div>
+        `;
+    }
 }
 
 function refreshCharts() {
     updateCharts();
-    showNotification("Charts refreshed!", "success");
-}
-
-function updateStatisticsSummary() {
-    // Safely access all properties with default values
-    const totalHours = parseFloat(studyData.totalStudyHours || (studyData.totalMinutes / 60).toFixed(1) || 0).toFixed(1);
-    document.getElementById('statsTotalHours').textContent = totalHours;
-    document.getElementById('statsStreak').textContent = studyData.streak || 0;
-    
-    const totalTasks = tasks.length;
-    const completedTasks = tasks.filter(t => t.completed).length;
-    const taskRate = totalTasks > 0 ? Math.round((completedTasks / totalTasks) * 100) : 0;
-    document.getElementById('statsTaskRate').textContent = `${taskRate}%`;
-    
-    const focusScore = calculateFocusScore();
-    document.getElementById('statsFocusScore').textContent = `${focusScore}%`;
-    
-    const hoursDetails = document.getElementById('statsHoursDetails');
-    const streakDetails = document.getElementById('statsStreakDetails');
-    const taskDetails = document.getElementById('statsTaskDetails');
-    const focusDetails = document.getElementById('statsFocusDetails');
-    
-    if (hoursDetails) {
-        const avgDaily = (studyData.totalStudyDays || 0) > 0 ? (parseFloat(studyData.totalStudyHours || 0) / (studyData.totalStudyDays || 1)).toFixed(1) : 0;
-        const sessionsCount = studyData.studySessions ? studyData.studySessions.length : 0;
-        hoursDetails.textContent = `${sessionsCount} sessions | Avg: ${avgDaily}h/day`;
-    }
-    
-    if (streakDetails) {
-        const streakHistory = studyData.streakHistory || [];
-        const longestStreak = streakHistory.length > 0 ? Math.max(...(streakHistory.map(s => s.streak || 0)), 0) : 0;
-        streakDetails.textContent = `Longest: ${longestStreak} days`;
-    }
-    
-    if (taskDetails) {
-        taskDetails.textContent = `${completedTasks}/${totalTasks} completed`;
-    }
-    
-    if (focusDetails) {
-        focusDetails.textContent = `Based on consistency & completion`;
-    }
-    
-    updateDetailedMetrics();
-}
-
-function updateDetailedMetrics() {
-    // Safely access all properties with default values
-    const totalSessions = studyData.studySessions ? studyData.studySessions.length : 0;
-    const avgDailyHours = (studyData.totalStudyDays || 0) > 0 ? (parseFloat(studyData.totalStudyHours || 0) / (studyData.totalStudyDays || 1)).toFixed(1) : 0;
-    
-    let longestSession = 0;
-    if (studyData.studySessions && studyData.studySessions.length > 0) {
-        const maxHours = Math.max(...studyData.studySessions.map(s => s.hours || 0));
-        longestSession = !isNaN(maxHours) && isFinite(maxHours) ? maxHours : 0;
-    }
-    
-    const completedTasks = tasks.filter(t => t.completed).length;
-    const activeTasks = tasks.filter(t => !t.completed).length;
-    const avgTasksPerDay = (studyData.totalStudyDays || 0) > 0 ? (tasks.length / (studyData.totalStudyDays || 1)).toFixed(1) : 0;
-    
-    const totalPoints = Math.floor(parseFloat(studyData.totalStudyHours || 0) * 100);
-    
-    const streakHistory = studyData.streakHistory || [];
-    const longestStreak = streakHistory.length > 0 ? Math.max(...(streakHistory.map(s => s.streak || 0)), 0) : 0;
-    
-    const consistencyScore = (studyData.totalStudyDays || 0) > 0 ? 
-        Math.round(((studyData.streak || 0) / (studyData.totalStudyDays || 1)) * 100) : 0;
-    
-    document.getElementById('avgDailyHours').textContent = avgDailyHours;
-    document.getElementById('totalSessions').textContent = totalSessions;
-    document.getElementById('longestSession').textContent = `${longestSession.toFixed(1)}h`;
-    document.getElementById('avgTasksPerDay').textContent = avgTasksPerDay;
-    document.getElementById('activeTasksCount').textContent = activeTasks;
-    document.getElementById('totalPoints').textContent = totalPoints;
-    document.getElementById('longestStreak').textContent = longestStreak;
-    document.getElementById('consistencyScore').textContent = `${consistencyScore}%`;
-    
-    const completedTasksWithTime = tasks.filter(t => t.completed && t.createdAt && t.completedAt);
-    let fastestCompletion = 'N/A';
-    if (completedTasksWithTime.length > 0) {
-        const fastest = completedTasksWithTime.reduce((fastest, task) => {
-            const created = new Date(task.createdAt);
-            const completed = new Date(task.completedAt);
-            const hours = (completed - created) / (1000 * 60 * 60);
-            return hours < fastest ? hours : fastest;
-        }, Infinity);
-        fastestCompletion = fastest !== Infinity ? `${fastest.toFixed(1)}h` : 'N/A';
-    }
-    document.getElementById('fastestCompletion').textContent = fastestCompletion;
+    showNotification("Charts refreshed successfully!", "success");
 }
 
 function calculateFocusScore() {
@@ -6236,7 +6725,6 @@ function updateAllStatistics() {
     updateSidebarStats();
     
     if (currentSection === 'statistics') {
-        updateStatisticsSummary();
         updateCharts();
     }
     
@@ -6384,7 +6872,7 @@ function showSection(sectionId) {
     updateDashboardHeader(sectionId);
     
     if (sectionId === 'statistics') {
-        updateCharts();
+        setTimeout(updateCharts, 100);
     }
 }
 
@@ -6437,7 +6925,6 @@ function updateDashboardHeader(sectionId) {
         case 'statistics':
             header.querySelector('h1').textContent = 'Learning Statistics';
             subtitle.textContent = 'Visualize your progress with charts and insights';
-            updateCharts();
             break;
         case 'tools':
             header.querySelector('h1').textContent = 'Study Tools';
@@ -6609,6 +7096,12 @@ function updateSyncStatus(text, type = "info") {
 function changeTheme(theme) {
     document.body.className = theme;
     localStorage.setItem('studentTheme', theme);
+    
+    // Recreate charts with new theme colors
+    if (currentSection === 'statistics') {
+        setTimeout(updateCharts, 100);
+    }
+    
     showNotification(`Switched to ${theme} theme`, "success");
 }
 
@@ -6616,7 +7109,7 @@ function changeTheme(theme) {
 function exportData() {
     const allData = {
         exportDate: new Date().toISOString(),
-        version: "2.4",
+        version: "2.5",
         user: {
             id: currentUserId,
             name: currentUserName,
@@ -6702,6 +7195,10 @@ function refreshData() {
     
     loadAllData();
     updateAllStatistics();
+    
+    if (currentSection === 'statistics') {
+        updateCharts();
+    }
     
     setTimeout(() => {
         refreshBtn.innerHTML = originalText;
