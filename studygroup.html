@@ -4,232 +4,583 @@
   <meta charset="UTF-8">
   <title>Study Groups</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
   <style>
-    :root{
-  --bg:#eef1ff;
-  --card:#ffffff;
-  --accent:#6c63ff;
-  --text:#222;
-}
-body.purple{
-  --bg:#140a26;
-  --card:#24144a;
-  --accent:#b388ff;
-  --text:#f3eefe;
-}
-body.ocean{
-  --bg:#0a1929;
-  --card:#1e3a5f;
-  --accent:#00b4d8;
-  --text:#caf0f8;
-}
-body{
-  margin:0;
-  background:var(--bg);
-  color:var(--text);
-  font-family:system-ui;
-  transition: 0.4s;
-}
-
-.header{
-  background: var(--card);
-  padding: 20px 40px;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.container{
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 30px 20px;
-}
-
-.grid{
-  display: grid;
-  grid-template-columns: 350px 1fr;
-  gap: 30px;
-  height: calc(100vh - 150px);
-}
-
-.sidebar{
-  background: var(--card);
-  border-radius: 20px;
-  padding: 25px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-  overflow-y: auto;
-}
-
-.chat-area{
-  background: var(--card);
-  border-radius: 20px;
-  padding: 25px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-  display: flex;
-  flex-direction: column;
-}
-
-button{
-  padding: 12px 25px;
-  border: none;
-  border-radius: 12px;
-  background: var(--accent);
-  color: white;
-  cursor: pointer;
-  font-size: 16px;
-  font-weight: bold;
-  transition: all 0.3s;
-}
-
-button:hover{
-  transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-}
-
-input, textarea{
-  width: 100%;
-  padding: 12px;
-  border: 2px solid #e0e0e0;
-  border-radius: 10px;
-  font-size: 16px;
-  font-family: inherit;
-  background: var(--bg);
-  color: var(--text);
-  margin: 10px 0;
-}
-
-input:focus, textarea:focus{
-  outline: none;
-  border-color: var(--accent);
-}
-
-.group-item{
-  background: var(--bg);
-  padding: 15px;
-  border-radius: 12px;
-  margin-bottom: 10px;
-  cursor: pointer;
-  transition: all 0.3s;
-  border-left: 4px solid transparent;
-}
-
-.group-item:hover{
-  transform: translateX(5px);
-  border-left-color: var(--accent);
-}
-
-.group-item.active{
-  background: var(--accent);
-  color: white;
-  border-left-color: white;
-}
-
-.message{
-  background: var(--bg);
-  padding: 15px;
-  border-radius: 15px;
-  margin-bottom: 15px;
-  animation: slideIn 0.3s;
-}
-
-@keyframes slideIn{
-  from{opacity: 0; transform: translateY(10px);}
-  to{opacity: 1; transform: translateY(0);}
-}
-
-.my-message{
-  background: var(--accent);
-  color: white;
-  margin-left: 60px;
-}
-
-.message-header{
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 8px;
-  font-size: 12px;
-  opacity: 0.8;
-}
-
-.message-content{
-  font-size: 16px;
-  line-height: 1.5;
-}
-
-.chat-messages{
-  flex: 1;
-  overflow-y: auto;
-  margin-bottom: 20px;
-  padding-right: 10px;
-}
-
-.chat-input-area{
-  display: flex;
-  gap: 10px;
-  align-items: flex-end;
-}
-
-.chat-input-area textarea{
-  flex: 1;
-  resize: none;
-  margin: 0;
-}
-
-.empty-state{
-  text-align: center;
-  padding: 60px 20px;
-  color: #999;
-}
-
-.empty-state-icon{
-  font-size: 64px;
-  margin-bottom: 20px;
-}
-
-.resource-item{
-  background: var(--bg);
-  padding: 12px 15px;
-  border-radius: 10px;
-  margin-bottom: 10px;
-}
-
-.resource-item a{
-  color: var(--accent);
-  text-decoration: none;
-  font-weight: bold;
-}
-
-.member-list{
-  background: var(--bg);
-  padding: 15px;
-  border-radius: 12px;
-  margin-top: 20px;
-}
-
-.member-item{
-  padding: 8px 0;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.online-dot{
-  width: 8px;
-  height: 8px;
-  background: #4caf50;
-  border-radius: 50%;
-}
-
-@media (max-width: 768px){
-  .grid{
-    grid-template-columns: 1fr;
-  }
-  .sidebar{
-    display: none;
-  }
-}
+    :root {
+      --bg: #eef1ff;
+      --card: #ffffff;
+      --accent: #6c63ff;
+      --text: #222;
+      --sidebar-width: 350px;
+    }
+    
+    body.purple {
+      --bg: #140a26;
+      --card: #24144a;
+      --accent: #b388ff;
+      --text: #f3eefe;
+    }
+    
+    body.ocean {
+      --bg: #0a1929;
+      --card: #1e3a5f;
+      --accent: #00b4d8;
+      --text: #caf0f8;
+    }
+    
+    * {
+      box-sizing: border-box;
+    }
+    
+    html, body {
+      overflow-x: hidden;
+      margin: 0;
+      padding: 0;
+    }
+    
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+      transition: 0.4s;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .header {
+      background: var(--card);
+      padding: 15px 20px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      width: 100%;
+    }
+    
+    .header h2 {
+      margin: 0;
+      font-size: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .header-controls {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .main-container {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    
+    .content-wrapper {
+      flex: 1;
+      display: flex;
+      gap: 20px;
+      width: 100%;
+      min-height: calc(100vh - 100px);
+    }
+    
+    .sidebar {
+      background: var(--card);
+      border-radius: 20px;
+      padding: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      overflow-y: auto;
+      width: var(--sidebar-width);
+      min-width: var(--sidebar-width);
+      transition: transform 0.3s ease;
+      z-index: 10;
+      max-height: calc(100vh - 140px);
+    }
+    
+    .chat-area {
+      background: var(--card);
+      border-radius: 20px;
+      padding: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      min-width: 0;
+      max-height: calc(100vh - 140px);
+    }
+    
+    button {
+      padding: 12px 20px;
+      border: none;
+      border-radius: 12px;
+      background: var(--accent);
+      color: white;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: 600;
+      transition: all 0.3s;
+      white-space: nowrap;
+    }
+    
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+    
+    input, textarea {
+      width: 100%;
+      padding: 12px 15px;
+      border: 2px solid rgba(0,0,0,0.1);
+      border-radius: 10px;
+      font-size: 16px;
+      font-family: inherit;
+      background: var(--bg);
+      color: var(--text);
+      margin: 10px 0;
+    }
+    
+    input:focus, textarea:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+    
+    .group-item {
+      background: var(--bg);
+      padding: 15px;
+      border-radius: 12px;
+      margin-bottom: 10px;
+      cursor: pointer;
+      transition: all 0.3s;
+      border-left: 4px solid transparent;
+      width: 100%;
+    }
+    
+    .group-item:hover {
+      transform: translateX(5px);
+      border-left-color: var(--accent);
+    }
+    
+    .group-item.active {
+      background: var(--accent);
+      color: white;
+      border-left-color: white;
+    }
+    
+    .message {
+      background: var(--bg);
+      padding: 15px;
+      border-radius: 15px;
+      margin-bottom: 15px;
+      max-width: 80%;
+      animation: slideIn 0.3s;
+      word-wrap: break-word;
+      overflow-wrap: break-word;
+    }
+    
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .my-message {
+      background: var(--accent);
+      color: white;
+      margin-left: auto;
+      margin-right: 0;
+    }
+    
+    .message-header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 8px;
+      font-size: 12px;
+      opacity: 0.8;
+    }
+    
+    .message-content {
+      font-size: 16px;
+      line-height: 1.5;
+      word-break: break-word;
+    }
+    
+    .chat-messages {
+      flex: 1;
+      overflow-y: auto;
+      margin-bottom: 20px;
+      padding-right: 10px;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .chat-input-area {
+      display: flex;
+      gap: 10px;
+      align-items: flex-end;
+      width: 100%;
+    }
+    
+    .chat-input-area textarea {
+      flex: 1;
+      resize: none;
+      margin: 0;
+      min-height: 60px;
+      max-height: 120px;
+    }
+    
+    .empty-state {
+      text-align: center;
+      padding: 40px 20px;
+      color: #999;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      flex: 1;
+    }
+    
+    .empty-state-icon {
+      font-size: 64px;
+      margin-bottom: 20px;
+    }
+    
+    .resource-item {
+      background: var(--bg);
+      padding: 12px 15px;
+      border-radius: 10px;
+      margin-bottom: 10px;
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+    }
+    
+    .resource-item a {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: bold;
+      word-break: break-all;
+    }
+    
+    .member-list {
+      background: var(--bg);
+      padding: 15px;
+      border-radius: 12px;
+      margin-top: 20px;
+      width: 100%;
+    }
+    
+    .member-item {
+      padding: 8px 0;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .online-dot {
+      width: 8px;
+      height: 8px;
+      background: #4caf50;
+      border-radius: 50%;
+    }
+    
+    .mobile-menu-toggle {
+      display: none;
+      background: var(--accent);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 10px 15px;
+      font-size: 1.2rem;
+      cursor: pointer;
+      width: 100%;
+      max-width: 200px;
+      margin: 10px auto;
+    }
+    
+    .mobile-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 5;
+    }
+    
+    .mobile-overlay.active {
+      display: block;
+    }
+    
+    .group-header {
+      border-bottom: 2px solid var(--bg);
+      padding-bottom: 15px;
+      margin-bottom: 20px;
+      width: 100%;
+    }
+    
+    .group-header-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      width: 100%;
+    }
+    
+    .group-header-info h2 {
+      margin: 0;
+      margin-bottom: 5px;
+      font-size: 1.5rem;
+      word-break: break-word;
+    }
+    
+    .group-header-info p {
+      margin: 0;
+      font-size: 14px;
+      color: #666;
+      word-break: break-word;
+    }
+    
+    .group-header-buttons {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    
+    .resources-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+      width: 100%;
+    }
+    
+    /* Responsive Styles */
+    @media (max-width: 1100px) {
+      .main-container {
+        padding: 15px;
+      }
+      
+      .sidebar {
+        width: 300px;
+        min-width: 300px;
+      }
+    }
+    
+    @media (max-width: 900px) {
+      .main-container {
+        padding: 10px;
+      }
+      
+      .content-wrapper {
+        flex-direction: column;
+        gap: 15px;
+      }
+      
+      .sidebar {
+        width: 100%;
+        min-width: auto;
+        max-height: 400px;
+        position: static;
+        transform: none;
+        order: 2;
+      }
+      
+      .chat-area {
+        min-height: 500px;
+        max-height: none;
+        order: 1;
+      }
+      
+      .mobile-menu-toggle {
+        display: block;
+      }
+      
+      .group-header-content {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      
+      .group-header-buttons {
+        width: 100%;
+        justify-content: space-between;
+      }
+      
+      .group-header-buttons button {
+        flex: 1;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .main-container {
+        padding: 10px;
+      }
+      
+      .header {
+        padding: 12px 15px;
+      }
+      
+      .header h2 {
+        font-size: 1.3rem;
+      }
+      
+      button {
+        padding: 10px 15px;
+        font-size: 14px;
+      }
+      
+      .chat-input-area {
+        flex-direction: column;
+      }
+      
+      .chat-input-area textarea {
+        min-height: 80px;
+      }
+      
+      .chat-input-area button {
+        width: 100%;
+        padding: 15px;
+      }
+      
+      .message {
+        max-width: 90%;
+      }
+      
+      .group-header-buttons {
+        flex-direction: column;
+        gap: 8px;
+      }
+      
+      .group-header-buttons button {
+        width: 100%;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .main-container {
+        padding: 8px;
+      }
+      
+      .sidebar, .chat-area {
+        padding: 15px;
+        border-radius: 15px;
+      }
+      
+      .header-controls {
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 8px;
+      }
+      
+      .header h2 {
+        font-size: 1.2rem;
+      }
+      
+      .empty-state-icon {
+        font-size: 48px;
+      }
+      
+      .message {
+        padding: 12px;
+        max-width: 95%;
+      }
+      
+      .group-item {
+        padding: 12px;
+      }
+    }
+    
+    @media (max-width: 360px) {
+      .header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+      }
+      
+      .header-controls {
+        width: 100%;
+        flex-direction: row;
+        justify-content: space-between;
+      }
+      
+      select, button {
+        font-size: 13px;
+        padding: 8px 12px;
+      }
+      
+      .mobile-menu-toggle {
+        max-width: 100%;
+      }
+    }
+    
+    /* Scrollbar styling */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    
+    ::-webkit-scrollbar-track {
+      background: rgba(0, 0, 0, 0.05);
+      border-radius: 10px;
+    }
+    
+    ::-webkit-scrollbar-thumb {
+      background: var(--accent);
+      border-radius: 10px;
+    }
+    
+    ::-webkit-scrollbar-thumb:hover {
+      background: rgba(108, 99, 255, 0.8);
+    }
+    
+    .sidebar-btn-group {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin: 20px 0;
+      width: 100%;
+    }
+    
+    .sidebar-btn-group button {
+      width: 100%;
+      text-align: center;
+    }
+    
+    #themeSelector {
+      padding: 10px 15px;
+      border-radius: 10px;
+      border: none;
+      background: var(--accent);
+      color: white;
+      cursor: pointer;
+      font-size: 14px;
+    }
+    
+    /* Fix for preventing horizontal scroll */
+    .chat-messages,
+    .sidebar,
+    .chat-input-area,
+    .group-header,
+    .resources-header {
+      overflow-x: hidden;
+    }
+    
+    /* Ensure all containers don't exceed viewport width */
+    .main-container,
+    .content-wrapper,
+    .sidebar,
+    .chat-area {
+      max-width: 100vw;
+    }
   </style>
   
   <!-- Firebase SDK -->
@@ -239,29 +590,37 @@ input:focus, textarea:focus{
 
 <body>
   <div class="header">
-    <h2>👥 Study Groups</h2>
-    <div>
-      <select onchange="changeTheme(this.value)" id="themeSelector" style="padding: 10px 18px; border-radius: 10px; border: none; background: var(--accent); color: white; cursor: pointer; margin-right: 10px;">
+    <h2><i class="fas fa-users"></i> Study Groups</h2>
+    <div class="header-controls">
+      <select onchange="changeTheme(this.value)" id="themeSelector">
         <option value="">🎨 Light</option>
         <option value="purple">💜 Purple</option>
         <option value="ocean">🌊 Ocean</option>
       </select>
-      <button onclick="location.href='studentmode.html'">← Back</button>
+      <button onclick="location.href='studentmode.html'">
+        <i class="fas fa-arrow-left"></i> Back
+      </button>
     </div>
   </div>
 
-  <div class="container">
-    <div class="grid">
+  <div class="main-container">
+    <button class="mobile-menu-toggle" id="mobileMenuToggle">
+      <i class="fas fa-bars"></i> Toggle Groups List
+    </button>
+    
+    <div class="mobile-overlay" id="mobileOverlay"></div>
+    
+    <div class="content-wrapper">
       <!-- SIDEBAR: Groups List -->
-      <div class="sidebar">
-        <h3>My Study Groups</h3>
+      <div class="sidebar" id="sidebar">
+        <h3><i class="fas fa-layer-group"></i> My Study Groups</h3>
         
-        <div style="margin: 20px 0;">
-          <button onclick="showCreateGroup()" style="width: 100%; background: #4caf50;">
-            ➕ Create New Group
+        <div class="sidebar-btn-group">
+          <button onclick="showCreateGroup()" style="background: #4caf50;">
+            <i class="fas fa-plus"></i> Create New Group
           </button>
-          <button onclick="showJoinGroup()" style="width: 100%; background: #2196f3; margin-top: 10px;">
-            🔗 Join Existing Group
+          <button onclick="showJoinGroup()" style="background: #2196f3;">
+            <i class="fas fa-link"></i> Join Existing Group
           </button>
         </div>
         
@@ -278,20 +637,20 @@ input:focus, textarea:focus{
         </div>
         
         <!-- Group Chat -->
-        <div id="groupChat" style="display: none; flex-direction: column; height: 100%;">
+        <div id="groupChat" style="display: none; flex-direction: column; height: 100%; width: 100%;">
           <!-- Group Header -->
-          <div style="border-bottom: 2px solid var(--bg); padding-bottom: 15px; margin-bottom: 20px;">
-            <div style="display: flex; justify-content: space-between; align-items: center;">
-              <div>
-                <h2 id="currentGroupName" style="margin: 0; margin-bottom: 5px;"></h2>
-                <p id="currentGroupCode" style="margin: 0; font-size: 14px; color: #666;"></p>
+          <div class="group-header">
+            <div class="group-header-content">
+              <div class="group-header-info">
+                <h2 id="currentGroupName"></h2>
+                <p id="currentGroupCode"></p>
               </div>
-              <div>
-                <button onclick="showGroupInfo()" style="background: #666; padding: 10px 20px;">
-                  ℹ️ Info
+              <div class="group-header-buttons">
+                <button onclick="showGroupInfo()" style="background: #666;">
+                  <i class="fas fa-info-circle"></i> Info
                 </button>
-                <button onclick="leaveGroup()" style="background: #e74c3c; padding: 10px 20px; margin-left: 10px;">
-                  🚪 Leave
+                <button onclick="leaveGroup()" style="background: #e74c3c;">
+                  <i class="fas fa-sign-out-alt"></i> Leave
                 </button>
               </div>
             </div>
@@ -305,10 +664,12 @@ input:focus, textarea:focus{
           </div>
           
           <!-- Resources Section -->
-          <div style="background: var(--bg); padding: 15px; border-radius: 12px; margin-bottom: 20px; max-height: 150px; overflow-y: auto;">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
-              <strong>📚 Shared Resources</strong>
-              <button onclick="showAddResource()" style="padding: 6px 12px; font-size: 14px;">+ Add</button>
+          <div style="background: var(--bg); padding: 15px; border-radius: 12px; margin-bottom: 20px; max-height: 150px; overflow-y: auto; width: 100%;">
+            <div class="resources-header">
+              <strong><i class="fas fa-book"></i> Shared Resources</strong>
+              <button onclick="showAddResource()" style="padding: 6px 12px; font-size: 14px;">
+                <i class="fas fa-plus"></i> Add
+              </button>
             </div>
             <div id="resourcesList"></div>
           </div>
@@ -316,8 +677,8 @@ input:focus, textarea:focus{
           <!-- Message Input -->
           <div class="chat-input-area">
             <textarea id="messageInput" placeholder="Type your message..." rows="2"></textarea>
-            <button onclick="sendMessage()" style="padding: 15px 30px;">
-              📤 Send
+            <button onclick="sendMessage()">
+              <i class="fas fa-paper-plane"></i> Send
             </button>
           </div>
         </div>
@@ -370,6 +731,38 @@ const savedTheme = localStorage.getItem('selectedTheme');
 if (savedTheme) {
   document.body.classList.add(savedTheme);
   document.getElementById('themeSelector').value = savedTheme;
+}
+
+/* ============================================
+   MOBILE MENU TOGGLE
+   ============================================ */
+const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+const sidebar = document.getElementById('sidebar');
+const mobileOverlay = document.getElementById('mobileOverlay');
+
+// Toggle sidebar on mobile
+mobileMenuToggle.addEventListener('click', () => {
+  if (sidebar.style.transform === 'translateX(0px)' || sidebar.style.transform === '') {
+    sidebar.style.transform = 'translateX(-100%)';
+    mobileOverlay.classList.remove('active');
+  } else {
+    sidebar.style.transform = 'translateX(0)';
+    mobileOverlay.classList.add('active');
+  }
+});
+
+// Close sidebar when clicking overlay
+mobileOverlay.addEventListener('click', () => {
+  sidebar.style.transform = 'translateX(-100%)';
+  mobileOverlay.classList.remove('active');
+});
+
+// Close sidebar when selecting a group on mobile
+function closeMobileSidebar() {
+  if (window.innerWidth <= 900) {
+    sidebar.style.transform = 'translateX(-100%)';
+    mobileOverlay.classList.remove('active');
+  }
 }
 
 /* ============================================
@@ -500,7 +893,10 @@ function renderGroupsList() {
         groupDiv = document.createElement('div');
         groupDiv.className = 'group-item';
         groupDiv.setAttribute('data-group-code', code);
-        groupDiv.onclick = () => selectGroup(code);
+        groupDiv.onclick = () => {
+          selectGroup(code);
+          closeMobileSidebar();
+        };
         list.appendChild(groupDiv);
       }
       
@@ -513,9 +909,9 @@ function renderGroupsList() {
       const memberCount = group.members ? Object.keys(group.members).length : 0;
       
       groupDiv.innerHTML = `
-        <div style="font-weight: bold; margin-bottom: 5px;">${group.name}</div>
+        <div style="font-weight: bold; margin-bottom: 5px; word-break: break-word;">${group.name}</div>
         <div style="font-size: 12px; opacity: 0.7;">
-          👥 ${memberCount} members • Code: ${code}
+          <i class="fas fa-users"></i> ${memberCount} members • Code: ${code}
         </div>
       `;
     });
@@ -791,6 +1187,34 @@ document.addEventListener('keypress', function(e) {
 /* ============================================
    INITIALIZE
    ============================================ */
+// Handle window resize
+window.addEventListener('resize', function() {
+  if (window.innerWidth > 900) {
+    sidebar.style.transform = 'translateX(0)';
+    sidebar.style.position = 'relative';
+    sidebar.style.height = 'auto';
+    mobileOverlay.classList.remove('active');
+  } else {
+    sidebar.style.position = 'fixed';
+    sidebar.style.height = '100vh';
+    sidebar.style.transform = 'translateX(-100%)';
+  }
+});
+
+// Initial check for mobile view
+if (window.innerWidth <= 900) {
+  sidebar.style.transform = 'translateX(-100%)';
+  sidebar.style.position = 'fixed';
+  sidebar.style.left = '0';
+  sidebar.style.top = '0';
+  sidebar.style.height = '100vh';
+  sidebar.style.zIndex = '100';
+  sidebar.style.borderRadius = '0';
+} else {
+  sidebar.style.transform = 'translateX(0)';
+  sidebar.style.position = 'relative';
+}
+
 // Start the app
 renderGroupsList();
   </script>
