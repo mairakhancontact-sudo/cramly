@@ -1902,7 +1902,53 @@ textarea {
     break-inside: avoid;
   }
 }
+/* ===== FLOATING FEEDBACK BUTTON ===== */
+.feedback-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: var(--gradient-info);
+    color: white;
+    border: none;
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-md) var(--spacing-lg);
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: var(--shadow-xl);
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    transition: all var(--transition);
+    animation: pulse 2s infinite;
+}
 
+.feedback-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-2xl);
+    background: var(--gradient-info-dark);
+}
+
+@keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.7); }
+    70% { box-shadow: 0 0 0 10px rgba(59, 130, 246, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0); }
+}
+
+/* Add this to your CSS variables if needed */
+:root {
+    --gradient-info-dark: linear-gradient(135deg, #2563eb, #1d4ed8);
+}
+
+/* Mobile adjustments */
+@media (max-width: 767px) {
+    .feedback-btn {
+        bottom: 70px;
+        right: 15px;
+        padding: var(--spacing-sm) var(--spacing-md);
+        font-size: 0.875rem;
+    }
+}
 </style>
 </head>
 <body>
@@ -2594,7 +2640,10 @@ textarea {
     </div>
   </div>
 </div>
-
+<!-- Floating Feedback Button -->
+<button class="feedback-btn" onclick="openFeedbackForm()">
+    💬 Give Feedback
+</button>
 <script>
 // ========== FIREBASE CONFIGURATION ==========
 const firebaseConfig = {
@@ -5572,6 +5621,10 @@ async function cleanupTeacherFromStudents() {
     } catch (error) {
         console.error("Error cleaning up teacher from students:", error);
     }
+}
+// ========== FEEDBACK FORM ==========
+function openFeedbackForm() {
+    window.open('https://docs.google.com/forms/d/e/1FAIpQLScJMM1dwIx3HvSu9mxyZm3HgZ7UO7QwLX673JKellaKLSM7EQ/viewform?usp=publish-editor', '_blank');
 }
 </script>
 </body>
