@@ -1949,6 +1949,363 @@ textarea {
         font-size: 0.875rem;
     }
 }
+
+/* ==================== */
+/* MOBILE RESPONSIVENESS */
+/* ==================== */
+
+/* 1. Base mobile adjustments */
+@media (max-width: 768px) {
+  /* Prevent zoom on iOS inputs */
+  input, textarea, select, button {
+    font-size: 16px !important;
+  }
+  
+  /* Improve touch targets */
+  .btn, .nav-item, .btn-submit, .delete-btn,
+  .mobile-menu-btn, .sidebar-toggle, .modal-close {
+    min-height: 44px !important;
+    min-width: 44px !important;
+  }
+  
+  /* Reduce base font size */
+  html {
+    font-size: 14px !important;
+  }
+}
+
+/* 2. Hide search bar AND search icon on mobile */
+@media (max-width: 768px) {
+  /* Hide the search input */
+  input[placeholder*="Search"],
+  input[placeholder*="search"] {
+    display: none !important;
+  }
+  
+  /* Hide the search icon (🔍) */
+  .controls-bar span:contains("🔍"),
+  .controls-bar > div > span:first-child,
+  .controls-bar > div:has(> span:first-child) {
+    display: none !important;
+  }
+  
+  /* Hide the entire search bar container */
+  .controls-bar > div:first-child {
+    display: none !important;
+  }
+  
+  /* Hide the button group in controls-bar */
+  .controls-bar > div:last-child:has(.btn) {
+    display: none !important;
+  }
+  
+  /* Make controls bar compact */
+  .controls-bar {
+    display: none !important; /* Hide entire controls bar on mobile */
+  }
+}
+
+/* 3. Hide the "Use the search bar" pro tip on mobile */
+@media (max-width: 768px) {
+  /* Target the pro tip that mentions "search bar" */
+  .pro-tip:has(strong:contains("Pro Tip")):has(:contains("search bar")),
+  .pro-tip:has(:contains("Use the search bar")),
+  .pro-tip:has(:contains("search bar to quickly find")),
+  .dashboard-header .pro-tip:last-child {
+    display: none !important;
+  }
+  
+  /* Alternative: Hide pro tips in dashboard-header after controls bar */
+  .dashboard-header > .pro-tip {
+    display: none !important;
+  }
+}
+
+/* 4. Hide desktop buttons but KEEP mobile header buttons */
+@media (max-width: 768px) {
+  /* Hide desktop refresh button */
+  .controls-bar .btn:has(> :contains("🔄")),
+  .controls-bar .btn[onclick*="refreshStudents"],
+  .controls-bar .btn[onclick*="refresh"] {
+    display: none !important;
+  }
+  
+  /* Hide desktop home button */
+  .controls-bar .btn[onclick*="index.html"],
+  .controls-bar .btn[onclick*="window.location"],
+  .controls-bar .btn:has(> :contains("🏠")) {
+    display: none !important;
+  }
+  
+  /* Hide demo mode button */
+  .btn[onclick*="toggleDemoMode"],
+  .btn[style*="gradient-warning"],
+  .btn:has(> :contains("Demo Mode")),
+  .btn:has(> :contains("🌐")) {
+    display: none !important;
+  }
+  
+  /* KEEP mobile header buttons visible */
+  .mobile-header .mobile-actions .btn-icon,
+  .mobile-header .mobile-actions button {
+    display: flex !important; /* Make sure mobile buttons show */
+    visibility: visible !important;
+  }
+}
+
+/* 5. Show mobile header properly with visible buttons */
+@media (max-width: 1020px) {
+  .mobile-header {
+    display: flex !important;
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    z-index: 999 !important;
+    background: var(--card) !important;
+    border-bottom: 1px solid var(--border) !important;
+    padding: 0.5rem 1rem !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    height: 60px !important;
+    box-shadow: var(--shadow) !important;
+    backdrop-filter: blur(10px) !important;
+  }
+  
+  /* Ensure mobile header buttons are visible */
+  .mobile-actions {
+    display: flex !important;
+    gap: 0.5rem !important;
+    align-items: center !important;
+    visibility: visible !important;
+  }
+  
+  .mobile-actions .btn-icon {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 40px !important;
+    height: 40px !important;
+    border-radius: 50% !important;
+    background: var(--card) !important;
+    border: 1px solid var(--border) !important;
+    color: var(--text) !important;
+    font-size: 1.2rem !important;
+  }
+  
+  .mobile-actions .btn-primary {
+    background: var(--gradient-primary) !important;
+    border-color: transparent !important;
+    color: white !important;
+  }
+  
+  .mobile-actions .btn-secondary:hover {
+    background: var(--accent-light) !important;
+    border-color: var(--accent) !important;
+  }
+  
+  .mobile-title {
+    font-size: 1.1rem !important;
+    font-weight: 700 !important;
+    color: var(--text) !important;
+    text-align: center !important;
+    flex: 1 !important;
+    margin: 0 1rem !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+  }
+  
+  /* Adjust main content to account for mobile header */
+  .main-content {
+    padding-top: 70px !important;
+  }
+  
+  /* Adjust app layout */
+  .app-layout {
+    padding-top: 0 !important;
+  }
+}
+
+/* 6. Adjust layout for mobile */
+@media (max-width: 768px) {
+  /* Center and resize dashboard headers */
+  .dashboard-header {
+    margin-top: 1rem !important;
+    text-align: center !important;
+    margin-bottom: 1.5rem !important;
+  }
+  
+  .dashboard-header h1 {
+    font-size: 1.75rem !important;
+    text-align: center !important;
+    margin-top: 0 !important;
+    margin-bottom: 0.5rem !important;
+  }
+  
+  .dashboard-subtitle {
+    font-size: 1rem !important;
+    text-align: center !important;
+    margin-bottom: 1.5rem !important;
+    line-height: 1.5 !important;
+    color: var(--text-muted) !important;
+  }
+  
+  /* Make grid single column */
+  .dashboard-grid {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 1.5rem !important;
+  }
+  
+  /* Quick stats responsive */
+  .quick-stats {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 1rem !important;
+    margin-bottom: 1.5rem !important;
+  }
+  
+  /* Stack forms and content sections */
+  .dashboard-grid > .dashboard-grid {
+    flex-direction: column !important;
+    gap: 1.5rem !important;
+    margin-top: 0 !important;
+  }
+}
+
+/* 7. Remove empty purple card */
+@media (max-width: 768px) {
+  /* Hide empty class code display */
+  .class-code-display:has(.code:contains("------")),
+  .class-code-display:has(.code:empty) {
+    display: none !important;
+  }
+}
+
+/* 8. Improve mobile forms and content */
+@media (max-width: 768px) {
+  .form-card,
+  .content-card {
+    padding: 1.25rem !important;
+    border-radius: 1rem !important;
+  }
+  
+  .form-card h2,
+  .content-header h2 {
+    font-size: 1.125rem !important;
+    margin-bottom: 1rem !important;
+  }
+  
+  .content-header {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 0.75rem !important;
+    padding: 1.25rem !important;
+  }
+  
+  .content-body {
+    padding: 1.25rem !important;
+    max-height: 350px !important;
+  }
+}
+
+/* 9. Handle safe areas for notched phones */
+@supports (padding: max(0px)) {
+  @media (max-width: 768px) {
+    .mobile-header {
+      padding-top: max(0.5rem, env(safe-area-inset-top)) !important;
+      padding-left: max(1rem, env(safe-area-inset-left)) !important;
+      padding-right: max(1rem, env(safe-area-inset-right)) !important;
+      height: calc(60px + env(safe-area-inset-top)) !important;
+    }
+    
+    .main-content {
+      padding-left: max(1rem, env(safe-area-inset-left)) !important;
+      padding-right: max(1rem, env(safe-area-inset-right)) !important;
+      padding-bottom: max(1rem, env(safe-area-inset-bottom)) !important;
+    }
+  }
+}
+
+/* 10. Disable hover effects on touch devices */
+@media (hover: none) and (pointer: coarse) {
+  .btn:hover,
+  .btn-submit:hover,
+  .nav-item:hover,
+  .student-item:hover,
+  .item:hover,
+  .stat-card:hover {
+    transform: none !important;
+    box-shadow: none !important;
+  }
+  
+  .btn:active {
+    transform: scale(0.98) !important;
+    opacity: 0.9 !important;
+  }
+}
+
+/* 11. Adjust for very small screens */
+@media (max-width: 480px) {
+  .quick-stats {
+    grid-template-columns: 1fr !important;
+    gap: 0.75rem !important;
+  }
+  
+  .stat-card {
+    flex-direction: column !important;
+    text-align: center !important;
+    padding: 1rem !important;
+    gap: 0.75rem !important;
+  }
+  
+  .mobile-actions {
+    gap: 0.25rem !important;
+  }
+  
+  .mobile-actions .btn-icon {
+    width: 36px !important;
+    height: 36px !important;
+    font-size: 1rem !important;
+  }
+}
+
+/* 12. Fix mobile header for landscape */
+@media (max-height: 500px) and (orientation: landscape) {
+  .mobile-header {
+    height: 50px !important;
+    padding: 0.25rem 1rem !important;
+  }
+  
+  .mobile-actions .btn-icon {
+    width: 36px !important;
+    height: 36px !important;
+    font-size: 1rem !important;
+  }
+  
+  .main-content {
+    padding-top: 60px !important;
+  }
+}
+
+
+
+/* 3. Hide the "Use the search bar" pro tip on mobile */
+@media (max-width: 768px) {
+  /* Target the pro tip that mentions "search bar" */
+  .pro-tip:has(strong:contains("Pro Tip")):has(:contains("search bar")),
+  .pro-tip:has(:contains("Use the search bar")),
+  .pro-tip:has(:contains("search bar to quickly find")),
+  .dashboard-header .pro-tip:last-child {
+    display: none !important;
+  }
+  
+  /* Alternative: Hide pro tips in dashboard-header after controls bar */
+  .dashboard-header > .pro-tip {
+    display: none !important;
+  }
+}
 </style>
 </head>
 <body>
@@ -2086,7 +2443,7 @@ textarea {
       
       <div class="controls-bar">
         <div class="search-bar" style="position: relative; flex: 1; max-width: 400px;">
-          <input type="text" id="studentSearch" placeholder="Search students..." oninput="searchStudents()" style="width: 100%; padding: 0.875rem 1rem 0.875rem 3rem; background: var(--bg); border: 2px solid var(--border); border-radius: var(--radius); font-size: 0.9375rem;">
+          <input type="text" id="studentSearch" placeholder="Search students by id ....." oninput="searchStudents()" style="width: 100%; padding: 0.875rem 1rem 0.875rem 3rem; background: var(--bg); border: 2px solid var(--border); border-radius: var(--radius); font-size: 0.9375rem;">
           <span style="position: absolute; left: 1rem; top: 50%; transform: translateY(-50%); color: var(--text-muted); pointer-events: none;">🔍</span>
         </div>
         <div style="display: flex; gap: var(--spacing-sm);">
